@@ -4,6 +4,8 @@ const { app, BrowserWindow }  = require('electron')
     , fs                      = require('fs')
     , cors                    = require('cors')
 
+const osBase = '/Applications'
+
 const isDev = true
 
 const NodeMermaid = require('node-mermaid')
@@ -91,7 +93,7 @@ app.whenReady().then(async () => {
   const MS = NodeMermaidStore({
     port: 6969,
     debug: false,
-    basePath: path.join(__dirname, '..', '____IN_APPLICATION____')
+    basePath: path.join(osBase, 'MermaidStoreData')
   })
 
   await NME.ready()

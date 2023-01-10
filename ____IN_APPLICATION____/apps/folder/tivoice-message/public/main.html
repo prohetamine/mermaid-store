@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Voice Message</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js" integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src='app-transport-channel.js'></script>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div>@voice</div>
+  <script>
+    const AppTransportChannel = MermaidAppTransportChannel()
+
+    const allowVoice = {}
+
+    const voice = ({ username, text }) => {
+      const isRu = text.match(/[йцукенгшщзхъфывапролджэячсмитьбюё]/gi)
+
+      const synth = window.speechSynthesis
+          , voices = synth.getVoices()
+          , utterThis = new SpeechSynthesisUtterance(username + (isRu ? ', говорит: ' : ', say: ') + text, {'lang': isRu ? 'ru-RU' : 'en-US', 'rate': 0.8, 'enqueue': true })
+
+      synth.speak(utterThis)
+    }
+
+    AppTransportChannel.on('connect', () => {
+      AppTransportChannel.on('readData', async ({ type, data }) => {
+        if (type === 'voice') {
+          voice(data)
+        }
+      })
+    })
+
+    AppTransportChannel.on('readData', async ({ type }) => {
+      if (type === 'reload') {
+        localStorage.clear()
+        window.location.reload()
+      }
+    })
+  </script>
+</body>
+</html>

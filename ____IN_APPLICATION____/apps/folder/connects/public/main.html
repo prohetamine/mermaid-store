@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Connects</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js" integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src='app-transport-channel.js'></script>
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id='main'></div>
+  <script>
+    const AppTransportChannel = MermaidAppTransportChannel()
+
+    AppTransportChannel.on('connect', () => {
+      AppTransportChannel.on('readData', async ({ type, data }) => {
+        if (type === 'status' && data.length > 0) {
+          document.querySelector('#main').innerHTML = data
+                                                        .sort((a, b) => a.online - b.online)
+                                                        .slice(0, 3)
+                                                        .map(site => `<div class='item'>${site.platform} <div class='${site.online ? 'ok-icon' : 'bad-icon'}'></div></div>`)
+                                                        .join('')
+                                                        +
+                                                        (s => s > 3 ? `<div style='width: 148px;'><div class='item' style='display: inline-flex;width: fit-content;'>And others (${s - 3})</div></div>` : '')(data.length)
+        }
+
+        if (type === 'reload') {
+          window.location.reload()
+        }
+      })
+
+      document.querySelector('#main').innerHTML = `
+        <div class='wrapper'>
+          <div class='not-found'>Wait connects <div class='wait-icon'></div></div>
+        </div>
+      `
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Wheel page</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js" integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src='app-transport-channel.js'></script>
+</head>
+<body>
+  <div id='hello'>data</div>
+  <script>
+    const AppTransportChannel = MermaidAppTransportChannel()
+
+    AppTransportChannel.on('connect', () => {
+      AppTransportChannel.on('readData', async ({ type, data }) => {
+        if (type === 'message') {
+          document.querySelector('#hello').innerHTML = JSON.stringify(data)
+        }
+      })
+
+      document.querySelector('#hello').addEventListener('click', () => {
+        AppTransportChannel.writeData(document.querySelector('#hello').innerHTML)
+      })
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+* {
+  overflow: hidden;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+canvas[width="158"] {
+  width: 100vw;
+  height: calc(100vw / 1.79545455);
+  overflow: hidden;
+  -webkit-app-region: drag;
+}

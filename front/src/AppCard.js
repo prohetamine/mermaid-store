@@ -5,8 +5,10 @@ import contextMenuIcon from './assets/context-menu-icon.svg'
 import contextMenuPlayIcon from './assets/context-menu-play-icon.svg'
 import contextMenuPauseIcon from './assets/context-menu-pause-icon.svg'
 import contextMenuReloadIcon from './assets/context-menu-reload-icon.svg'
+import contextMenuUpdateIcon from './assets/context-menu-update-icon.svg'
 import contextMenuReadmeIcon from './assets/context-menu-readme-icon.svg'
 import contextMenuDeleteIcon from './assets/context-menu-delete-icon.svg'
+import contextMenuWorkDirIcon from './assets/context-menu-work-dir-icon.svg'
 
 const Card = styled.div`
   background: #FFFFFF;
@@ -64,7 +66,7 @@ const ContextMenuIcon = styled.div`
 
 const ContextMenu = styled.div`
   width: 89px;
-  height: 104px;
+  height: ${props => props.size};
   background: #FFFFFF;
   box-shadow: 0px 1px 20px rgba(23, 23, 23, 0.15);
   border-radius: 8px;
@@ -119,32 +121,40 @@ const cardSize = [{
   height: 358 - 17
 }]
 
-const AppCard = ({ app }) => {
+const AppCard = ({ data }) => {
   const [contextMenu, setContextMenu] = useState(false)
   const [isPlay, setPlay] = useState(true)
+
+  useEffect(() => {
+    const appState = ({ appData, state }) => {
+      if (appData.app === data.app && appData.repository === data.repository) {
+        setPlay(state.isPlay)
+      }
+    }
+
+    window.socket.on('app-state', appState)
+    return () => window.socket.off('app-state', appState)
+  }, [data])
 
   return (
     <Card className='grid-app' tabIndex="-1" onBlur={() => setContextMenu(false)}>
       <CardHead>
         <WrapperTitle>
-          <CardRepo>~{app.repo}/</CardRepo>
-          <CardApp>{app.app}</CardApp>
+          <CardRepo>~{data.repository}/</CardRepo>
+          <CardApp>{data.app}</CardApp>
         </WrapperTitle>
         <ContextMenuIcon onClick={() => setContextMenu(true)} />
         {
           contextMenu
             ? (
-              <ContextMenu>
+              <ContextMenu size={data.zip ? '156px' : '130px'}>
                 <ContextMenuItem
                   onClick={() => {
                     if (isPlay) {
-                      window.socket.emit('pause', app) // Зачем тут сокет ?? Не нужен (Нет никакой информации о состоянии, вообще не имеет смысла)
-                      setPlay(false)
+                      window.socket.emit('app-pause', { repository: data.repository, app: data.app })
                     } else {
-                      window.socket.emit('play', app) // Зачем тут сокет ?? Не нужен (Нет никакой информации о состоянии, вообще не имеет смысла)
-                      setPlay(true)
+                      window.socket.emit('app-play', { repository: data.repository, app: data.app })
                     }
-                    setContextMenu(false)
                   }}
                 >
                   {
@@ -165,7 +175,7 @@ const AppCard = ({ app }) => {
                 </ContextMenuItem>
                 <ContextMenuItem
                   onClick={() => {
-                    window.socket.emit('reload', app) // Зачем тут сокет ? Не нужен
+                    window.socket.emit('app-reload', data)
                     setContextMenu(false)
                   }}
                 >
@@ -176,7 +186,38 @@ const AppCard = ({ app }) => {
                   <ContextMenuItemTitle>Readme</ContextMenuItemTitle>
                   <div style={{ backgroundImage: `url(${contextMenuReadmeIcon})`, width: '10px', height: '14px' }} />
                 </ContextMenuItem>
-                <ContextMenuItem>
+                {
+                  data.zip
+                    ? (
+                      <ContextMenuItem
+                        onClick={() => {
+                          window.socket.emit('app-update', { repository: data.repository, app: data.app, zip: data.zip })
+                          setContextMenu(false)
+                        }}
+                      >
+                        <ContextMenuItemTitle>Update</ContextMenuItemTitle>
+                        <div style={{ backgroundImage: `url(${contextMenuUpdateIcon})`, width: '10px', height: '14px' }} />
+                      </ContextMenuItem>
+                    )
+                    : (
+                      null
+                    )
+                }
+                <ContextMenuItem
+                  onClick={() => {
+                    window.socket.emit('app-work-folder', { repository: data.repository, app: data.app })
+                    setContextMenu(false)
+                  }}
+                >
+                  <ContextMenuItemTitle>Work dir</ContextMenuItemTitle>
+                  <div style={{ backgroundImage: `url(${contextMenuWorkDirIcon})`, width: '10px', height: '14px' }} />
+                </ContextMenuItem>
+                <ContextMenuItem
+                  onClick={() => {
+                    window.socket.emit('app-delete', { repository: data.repository, app: data.app })
+                    setContextMenu(false)
+                  }}
+                >
                   <ContextMenuItemTitle>Delete</ContextMenuItemTitle>
                   <div style={{ backgroundImage: `url(${contextMenuDeleteIcon})`, width: '10px', height: '10px' }} />
                 </ContextMenuItem>
@@ -185,7 +226,7 @@ const AppCard = ({ app }) => {
             : null
         }
       </CardHead>
-      <Iframe width={cardSize[app.size - 1].width} height={cardSize[app.size - 1].height} title={`~${app.repo}/${app.app}`} src={`http://localhost:6969/${app.repo}/${app.app}/public/main.html`} frameBorder="0"></Iframe>
+      <Iframe width={cardSize[data.size - 1].width} height={cardSize[data.size - 1].height} title={`~${data.repository}/${data.app}`} src={`http://localhost:6969/${data.repository}/${data.app}/public/main.html`} frameBorder="0"></Iframe>
     </Card>
   )
 }

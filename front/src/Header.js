@@ -85,7 +85,7 @@ const Header = ({ onSearch, onMenu, onAppsState }) => {
       , [appsState, setAppsState] = useState(true)
 
   useEffect(() => {
-    onSearch(search)
+    onSearch(search.replace(/(\*|\\|\?|\(|\)|\[|\]|\+|\|\`)/gi, ''))
   }, [search, onSearch])
 
   useEffect(() => {

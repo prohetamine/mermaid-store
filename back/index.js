@@ -1,20 +1,17 @@
 const { app, BrowserWindow }  = require('electron')
     , path                    = require('path')
     , express                 = require('express')
-    , fs                      = require('fs')
-    , cors                    = require('cors')
-
-const osBase = '/Applications'
 
 const isDev = true
 
-const NodeMermaid = require('node-mermaid')
-    , NodeMermaidStore = require('node-mermaid/store')
+const NodeMermaid = require('/Users/stas/Projects/node-mermaid')
+    , NodeMermaidStore = require('/Users/stas/Projects/node-mermaid/store')
 
 const MainWindow = () => {
   const win = new BrowserWindow({
+    icon: path.join(__dirname, 'icon.png'),
     width: 852,
-    height: 600,
+    height: 700,
     minWidth: 652,
     maxWidth: 1252,
     titleBarStyle: 'hidden',
@@ -90,18 +87,15 @@ app.whenReady().then(async () => {
     debug: false
   })
 
-  const MS = NodeMermaidStore({
+  const MS = await NodeMermaidStore({
     port: 6969,
-    debug: false,
-    basePath: path.join(osBase, 'MermaidStoreData')
+    debug: false
   })
 
   await NME.ready()
   await MS.ready()
 
-  MS.execApps()
-
-  NME.on('data', data =>
+  NME.on('data', data => 
     MS.AppChannel.writeData('data', data)
   )
 
@@ -111,7 +105,7 @@ app.whenReady().then(async () => {
 
   MS.on('open-window', MermaidWindow)
 
-  server.use('/build', express.static(path.resolve(__dirname, 'front', 'build')))
+  server.use('/build', express.static(path.resolve(__dirname, '..', 'front', 'build')))
   server.listen(8989, () => {
     MainWindow()
 

@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import styled from 'styled-components'
 
+import Menu from './Menu'
 import Header from './Header'
 import AppCards from './AppCards'
-
+import AppSearch from './AppSearch'
 
 window.socket = io(
   `http://localhost:6969?platform=store-channel`,
@@ -16,15 +17,34 @@ window.socket = io(
 )
 
 const App = () => {
+  const [isMenu, setMenu] = useState(false)
+      , [search, setSearch] = useState('')
 
   return (
     <div>
+      {
+        isMenu
+          ? (
+            <Menu onClose={() => setMenu(false)} />
+          )
+          : (
+            null
+          )
+      }
       <Header
-        onSearch={value => ''}
-        onMenu={value => ''}
+        onSearch={value => setSearch(value)}
+        onMenu={value => setMenu(value)}
         onAppsState={value => ''}
       />
-      <AppCards />
+      {
+        search
+          ? (
+            <AppSearch search={search} />
+          )
+          : (
+            <AppCards />
+          )
+      }
     </div>
   )
 }

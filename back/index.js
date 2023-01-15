@@ -1,11 +1,14 @@
 const { app, BrowserWindow }  = require('electron')
     , path                    = require('path')
     , express                 = require('express')
+    , os                      = require('node:os')
+
+const NodeMermaid             = require('/Users/stas/Projects/node-mermaid')
+    , NodeMermaidStore        = require('/Users/stas/Projects/node-mermaid/store')
 
 const isDev = true
 
-const NodeMermaid = require('/Users/stas/Projects/node-mermaid')
-    , NodeMermaidStore = require('/Users/stas/Projects/node-mermaid/store')
+const isMacOS = os.platform() === 'darwin'
 
 const MainWindow = () => {
   const win = new BrowserWindow({
@@ -14,7 +17,7 @@ const MainWindow = () => {
     height: 700,
     minWidth: 652,
     maxWidth: 1252,
-    titleBarStyle: 'hidden',
+    titleBarStyle: isMacOS ? 'hidden' : 'default',
     alwaysOnTop: false,
     webPreferences: {
       nodeIntegration: true,
@@ -50,19 +53,24 @@ const MainWindow = () => {
   })
 }
 
-const MermaidWindow = ({ url, width, height, titleBarStyle, alwaysOnTop, frame, proportions }) => {
-  const win = new BrowserWindow({
-    width,
-    height,
-    alwaysOnTop,
-    titleBarStyle,
-    frame,
-    proportions,
+const MermaidWindow = windowConfig => {
+  const { url, proportions, titleBarStyle } = windowConfig
+
+  const config = {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
-    }
-  })
+    },
+    ...windowConfig
+  }
+
+  if (titleBarStyle) {
+    config.titleBarStyle = isMacOS
+                              ? titleBarStyle
+                              : 'default'
+  }
+
+  const win = new BrowserWindow(config)
 
   if (proportions) {
     let width = 0
@@ -95,7 +103,7 @@ app.whenReady().then(async () => {
   await NME.ready()
   await MS.ready()
 
-  NME.on('data', data => 
+  NME.on('data', data =>
     MS.AppChannel.writeData('data', data)
   )
 

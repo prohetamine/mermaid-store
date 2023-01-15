@@ -180,7 +180,7 @@ const AppCard = ({ data }) => {
                   }}
                 >
                   <ContextMenuItemTitle>Reload</ContextMenuItemTitle>
-                  <div style={{ backgroundImage: `url(${contextMenuReloadIcon})`, width: '11px', height: '15.5px' }} />
+                  <div style={{ backgroundImage: `url(${contextMenuReloadIcon})`, width: '13px', height: '14px' }} />
                 </ContextMenuItem>
                 <ContextMenuItem>
                   <ContextMenuItemTitle>Readme</ContextMenuItemTitle>

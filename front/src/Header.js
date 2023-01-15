@@ -100,7 +100,7 @@ const Header = ({ onSearch, onMenu, onAppsState }) => {
           className='nodragbar'
           value={search}
           onChange={({ target: { value } }) => setSearch(value)}
-          placeholder='Find apps ...'
+          placeholder='Find applications ...'
         />
       </SearchWrapper>
       <NavigationWrapper>

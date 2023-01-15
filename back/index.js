@@ -6,7 +6,7 @@ const { app, BrowserWindow }  = require('electron')
 const NodeMermaid             = require('/Users/stas/Projects/node-mermaid')
     , NodeMermaidStore        = require('/Users/stas/Projects/node-mermaid/store')
 
-const isDev = true
+const isDev = false
 
 const isMacOS = os.platform() === 'darwin'
 

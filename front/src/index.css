@@ -20,3 +20,9 @@ code {
 .nodragbar {
   -webkit-app-region: no-drag;
 }
+
+@keyframes spin {
+  100% {
+    transform:rotate(360deg);
+  }
+}

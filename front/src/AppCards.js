@@ -42,7 +42,7 @@ const AppCards = ({ app }) => {
       {
         apps.map((data, i) => {
           return (
-            <AppCard data={data} key={JSON.stringify(data)} />
+            <AppCard appData={data} key={JSON.stringify(data)} />
           )
         })
       }

@@ -3,8 +3,8 @@ const { app, BrowserWindow }  = require('electron')
     , express                 = require('express')
     , os                      = require('os')
 
-const NodeMermaid             = require('node-mermaid')
-    , NodeMermaidStore        = require('node-mermaid/store')
+const NodeMermaid             = require('/Users/stas/Projects/node-mermaid')
+    , NodeMermaidStore        = require('/Users/stas/Projects/node-mermaid/store')
 
 const isDev = false
 

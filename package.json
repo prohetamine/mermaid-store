@@ -20,7 +20,7 @@
     "html-escaper": "^3.0.3",
     "http": "^0.0.1-security",
     "kill-port": "^2.0.1",
-    "node-mermaid": "latest",
+    "node-mermaid": "^0.1.333",
     "open": "^8.4.0",
     "path": "^0.12.7",
     "sleep-promise": "^9.1.0",

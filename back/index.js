@@ -1,7 +1,7 @@
 const { app, BrowserWindow }  = require('electron')
     , path                    = require('path')
     , express                 = require('express')
-    , os                      = require('node:os')
+    , os                      = require('os')
 
 const NodeMermaid             = require('node-mermaid')
     , NodeMermaidStore        = require('node-mermaid/store')

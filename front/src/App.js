@@ -1,11 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { io } from 'socket.io-client'
-import styled from 'styled-components'
+import { observer } from 'mobx-react-lite'
+import queryString from 'query-string'
 
-import Menu from './Menu'
-import Header from './Header'
-import AppCards from './AppCards'
-import AppSearch from './AppSearch'
+import mainState from './main-state'
+
+import useGetApps from './hooks/use-get-apps'
+import useGetWorkedApps from './hooks/use-get-worked-apps'
+import useGetRepositorys from './hooks/use-get-repositorys'
+
+import Navigation from './components/navigation'
+import Info from './components/info'
+import ReadmeViewer from './components/readme-viewer'
+import AppCards from './components/app-cards'
+import AppSearchCards from './components/app-search-cards'
 
 window.socket = io(
   `http://localhost:6969?platform=store-channel`,
@@ -16,37 +24,49 @@ window.socket = io(
   }
 )
 
-const App = () => {
-  const [isMenu, setMenu] = useState(false)
-      , [search, setSearch] = useState('')
+const Main = observer(() => {
+  const appsData = useGetApps()
+      , workedAppsData = useGetWorkedApps()
+      , repositorysData = useGetRepositorys()
+
+  useEffect(() => {
+    mainState.statusWall.installedApplications = appsData.length
+  }, [appsData])
+
+  useEffect(() => {
+    mainState.statusWall.repositorys = repositorysData.length
+    mainState.statusWall.availableApplications = repositorysData.reduce((ctx, { appsData }) => ctx + appsData.length, 0)
+  }, [repositorysData])
+
+  useEffect(() => {
+    mainState.statusWall.activeApplications = workedAppsData.length
+  }, [workedAppsData])
 
   return (
-    <div>
+    <>
+      <Navigation />
+      <Info />
       {
-        isMenu
+        mainState.search
           ? (
-            <Menu onClose={() => setMenu(false)} />
+            <AppSearchCards />
           )
           : (
-            null
+            <AppCards appsData={appsData} />
           )
       }
-      <Header
-        onSearch={value => setSearch(value)}
-        onMenu={value => setMenu(value)}
-        onAppsState={value => ''}
-      />
-      {
-        search
-          ? (
-            <AppSearch search={search} />
-          )
-          : (
-            <AppCards />
-          )
-      }
-    </div>
+    </>
   )
-}
+})
+
+const App = observer(() => {
+  const { readme } = queryString.parse(window.location.search)
+
+  return readme ? (
+    <ReadmeViewer readme={readme} />
+  ) : (
+    <Main />
+  )
+})
 
 export default App

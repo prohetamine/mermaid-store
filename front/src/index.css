@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #FAFAFA;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 code {

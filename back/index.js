@@ -6,7 +6,7 @@ const { app, BrowserWindow }  = require('electron')
 const NodeMermaid             = require('/Users/stas/Projects/node-mermaid')
     , NodeMermaidStore        = require('/Users/stas/Projects/node-mermaid/store')
 
-const isDev = false
+const isDev = true
 
 const isMacOS = os.platform() === 'darwin'
 
@@ -87,6 +87,21 @@ const MermaidWindow = windowConfig => {
   win.loadURL(url)
 }
 
+const MermaidReadmeWindow = url => {
+  const win = new BrowserWindow({
+    icon: path.join(__dirname, 'icon.png'),
+    width: 500,
+    height: 700
+  })
+
+  console.log(url)
+  win.loadURL(
+    isDev
+      ? `http://localhost:3000?readme=${url}`
+      : `http://localhost:8989/build?readme=${url}`
+  )
+}
+
 app.whenReady().then(async () => {
   const server = express()
 
@@ -112,6 +127,7 @@ app.whenReady().then(async () => {
   )
 
   MS.on('open-window', MermaidWindow)
+  MS.on('open-readme', MermaidReadmeWindow)
 
   server.use('/build', express.static(path.resolve(__dirname, '..', 'front', 'build')))
   server.listen(8989, () => {

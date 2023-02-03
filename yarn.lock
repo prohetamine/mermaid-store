@@ -2846,10 +2846,10 @@ node-gyp@^9.0.0, node-gyp@^9.3.0:
     tar "^6.1.2"
     which "^2.0.2"
 
-node-mermaid@*:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/node-mermaid/-/node-mermaid-1.0.0.tgz#d0ce76f9d1c58dc7a75a9af6dba1eb1e5238d7f2"
-  integrity sha512-befTr8+mjNNr+3VVoWRjZePI1ngtVDge8ewb+Yr85WJ83pRJl4f4pP2MrnuT5Cp0pEO8fZ1BQZUUjNUlLIznJw==
+node-mermaid@^2.1.31:
+  version "2.1.31"
+  resolved "https://registry.yarnpkg.com/node-mermaid/-/node-mermaid-2.1.31.tgz#55e0e4a02ddc4f9b37440d10357d61833b31bf09"
+  integrity sha512-DJTSvf4ffJUedr21GB1eNb9xD7Dad25r7bCYdqFeUNgQyOp09R+9kYZSL82Sz8uQ8vIOpAcGR/aSRCZHmRcGBA==
   dependencies:
     app-data-folder "^1.0.0"
     assert-file "^1.0.0"

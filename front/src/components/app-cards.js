@@ -28,7 +28,7 @@ const AppCards = observer(({ appsData }) => {
 
       return () => msnry.destroy()
     }
-  }, [ref, appsData])
+  }, [ref, appsData.length, JSON.stringify(mainState.pinApps)])
 
   return (
     <Body ref={ref}>

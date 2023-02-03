@@ -3,8 +3,8 @@ const { app, BrowserWindow }  = require('electron')
     , express                 = require('express')
     , os                      = require('os')
 
-const NodeMermaid             = require('/Users/stas/Projects/node-mermaid')
-    , NodeMermaidStore        = require('/Users/stas/Projects/node-mermaid/store')
+const NodeMermaid             = require('node-mermaid')
+    , NodeMermaidStore        = require('node-mermaid/store')
 
 const isDev = true
 
@@ -90,11 +90,10 @@ const MermaidWindow = windowConfig => {
 const MermaidReadmeWindow = url => {
   const win = new BrowserWindow({
     icon: path.join(__dirname, 'icon.png'),
-    width: 500,
+    width: 900,
     height: 700
   })
 
-  console.log(url)
   win.loadURL(
     isDev
       ? `http://localhost:3000?readme=${url}`
@@ -117,6 +116,8 @@ app.whenReady().then(async () => {
 
   await NME.ready()
   await MS.ready()
+
+  MS.AppChannel.on('sendMessage', NME.sendMessage)
 
   NME.on('data', data =>
     MS.AppChannel.writeData('data', data)

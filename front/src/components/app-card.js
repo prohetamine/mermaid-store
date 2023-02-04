@@ -130,9 +130,11 @@ const AppCard = observer(({ appData }) => {
                   { label: 'Readme', icon: 'question', type: 'readme' }
                 ]
             : [
-                isPlay
-                  ? ({ label: 'Play', icon: 'play', type: 'play' })
-                  : ({ label: 'Pause', icon: 'pause', type: 'pause' }),
+                isPlay === null
+                  ? (null)
+                  : isPlay
+                      ? ({ label: 'Pause', icon: 'pause', type: 'pause' })
+                      : ({ label: 'Play', icon: 'play', type: 'play' }),
                 { label: 'Pin to top', icon: 'pin', type: 'pin' },
                 { label: 'Reload', icon: 'reload', type: 'reload' },
                 appData.zip
@@ -145,7 +147,7 @@ const AppCard = observer(({ appData }) => {
         }
         onClick={
           ({ type }) => {
-            if (type === 'play') {
+            if (type === 'pause') {
               window.socket.emit('app-pause', { repository: appData.repository, app: appData.app })
               setShowContextMenu(false)
             }
@@ -159,7 +161,7 @@ const AppCard = observer(({ appData }) => {
               setShowContextMenu(false)
             }
 
-            if (type === 'pause') {
+            if (type === 'play') {
               window.socket.emit('app-play', { repository: appData.repository, app: appData.app })
               setShowContextMenu(false)
             }

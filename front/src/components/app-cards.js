@@ -15,6 +15,8 @@ const Body = styled.div`
 const AppCards = observer(({ appsData }) => {
   const ref = useRef()
 
+  const pinApps = JSON.stringify(mainState.pinApps)
+
   useEffect(() => {
     const node = ref.current
 
@@ -28,7 +30,7 @@ const AppCards = observer(({ appsData }) => {
 
       return () => msnry.destroy()
     }
-  }, [ref, appsData.length, JSON.stringify(mainState.pinApps)])
+  }, [ref, appsData.length, pinApps])
 
   return (
     <Body ref={ref}>

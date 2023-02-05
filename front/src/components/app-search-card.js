@@ -238,7 +238,7 @@ const AppSearchCard = ({ repositoryData, isLine }) => {
               ? (
                 <SmallContainer>
                   <SmallTitle>Update:</SmallTitle>
-                  <SmallContent>{moment(repositoryData.date).format('DD.MM.YY [at] hh:mm')}</SmallContent>
+                  <SmallContent>{moment(repositoryData.date).format('DD.MM.YY [at] hh:mm:ss')}</SmallContent>
                 </SmallContainer>
               )
               : (

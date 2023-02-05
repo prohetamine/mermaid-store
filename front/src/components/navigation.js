@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import mainState from './../main-state'
 
-import background from './../assets/background.svg'
+import background from './../assets/background.png'
 import logo from './../assets/images/logo.svg'
 
 const Body = styled.div`

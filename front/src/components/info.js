@@ -5,8 +5,8 @@ import useHorizontalScroll from './../hooks/use-horizontal-scroll'
 import mainState from './../main-state'
 
 import removeIcon from './../assets/general/remove.svg'
-import apiImage from './../assets/images/api.svg'
-import supportImage from './../assets/images/crystal.svg'
+import apiImage from './../assets/images/api.png'
+import supportImage from './../assets/images/crystal.png'
 
 
 const Body = styled.div`

@@ -18,7 +18,7 @@ const useCheckAppInstalled = ({ app, repository }) => {
 
     const intervalId = setInterval(() => {
       window.socket.emit('check-app-installed', { repository, app })
-    }, 5000)
+    }, 2000)
 
     return () => {
       clearTimeout(timeId)

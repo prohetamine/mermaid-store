@@ -17,7 +17,14 @@ const MainWindow = () => {
     height: 700,
     minWidth: 652,
     maxWidth: 1252,
-    titleBarStyle: isMacOS ? 'hidden' : 'default',
+    frame: false,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#4C9AF1',
+      symbolColor: '#fff'
+    },
+    fullscreen: false,
+    fullscreenable: false,
     alwaysOnTop: false,
     webPreferences: {
       nodeIntegration: true,

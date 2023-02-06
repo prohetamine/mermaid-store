@@ -7,7 +7,7 @@ window.onload = function() {
                       ? 'mac-os'
                       : 'windows'
 
-  const isBarBackground = !(window.location.href === 'http://localhost:3000/' || window.location.href === 'http://localhost:8989/build')
+  const isBarBackground = !(window.location.href === 'http://localhost:3000/' || window.location.href === 'http://localhost:8989/build/')
 
   const style = document.createElement('style')
   style.textContent = `
@@ -30,7 +30,7 @@ window.onload = function() {
       display: flex;
       align-items: center;
       justify-content: center;
-      position: fixed;
+      position: absolute;
       z-index: 9999998;
       top: -30px;
       left: 0px;
@@ -123,6 +123,7 @@ window.onload = function() {
     }
 
     .mermaid-style-title {
+      font-family: 'Inter';
       color: #fff;
       font-size: 14px;
     }
@@ -152,6 +153,10 @@ window.onload = function() {
     ipcRenderer.send('maximize');
   })
 
+  const fontNode = document.createElement('link')
+  fontNode.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap'
+  fontNode.rel = 'stylesheet'
+
   const titleNode = document.createElement('div')
   titleNode.className = 'mermaid-style-title'
   titleNode.innerText = document.querySelector('title').innerHTML
@@ -163,8 +168,11 @@ window.onload = function() {
   barNode.appendChild(titleNode)
   barNode.appendChild(wrapperNode)
 
+  barNode.style.position = isBarBackground ? 'fixed' : 'absolute'
+
   document.body.appendChild(style)
   document.body.appendChild(barNode)
+  document.body.appendChild(fontNode)
 
   window.addEventListener('mouseover', () => {
     barNode.style.top = '0px'

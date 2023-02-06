@@ -6,7 +6,7 @@ const platform = isMacOS
                     ? 'mac-os'
                     : 'windows'
 
-const isBarBackground = !(window.location.href === 'http://localhost:3000/' || window.location.href === 'http://localhost:8989/build')
+const isBarBackground = !(window.location.href === 'http://localhost:3000/' || window.location.href === 'http://localhost:8989/build/')
 
 const style = document.createElement('style')
 style.textContent = `
@@ -148,6 +148,7 @@ wrapperNode.appendChild(closeButtonNode)
 wrapperNode.appendChild(minimizeButtonNode)
 wrapperNode.appendChild(maximizeButtonNode)
 
+barNode.style.position = isBarBackground ? 'fixed' : 'absolute'
 barNode.appendChild(wrapperNode)
 
 document.body.appendChild(style)

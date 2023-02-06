@@ -41,12 +41,10 @@ const MainWindow = () => {
   })
 
   ipcMain.on('setWindowButtonVisibility', (e, isVisibility) => {
-    try {
+    if (isMacOS) {
       win.setWindowButtonVisibility(isVisibility)
-    } catch (e) {
-      win.setTitleBarOverlay({
-        height: 0
-      })
+    } else {
+      // windows ?????
     }
   })
 

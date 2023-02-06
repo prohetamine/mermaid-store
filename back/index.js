@@ -21,7 +21,8 @@ const MainWindow = () => {
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#4C9AF1',
-      symbolColor: '#fff'
+      symbolColor: '#fff',
+      borderRadius: '8px'
     },
     fullscreen: false,
     fullscreenable: false,

@@ -22,7 +22,7 @@ const MainWindow = () => {
     titleBarOverlay: {
       color: '#4C9AF1',
       symbolColor: '#fff',
-      borderRadius: '8px'
+      borderRadius: 8
     },
     fullscreen: false,
     fullscreenable: false,

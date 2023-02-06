@@ -2,14 +2,27 @@
   "name": "mermaid-store",
   "version": "1.0.0",
   "description": "Webcam Tool",
-  "author": "",
   "main": "back/index.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --win --mac"
+    "dist": "electron-builder -mwl",
+    "publish": "electron-builder -mwl --publish always"
   },
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prohetamine/mermaid-store.git"
+  },
+  "author": {
+    "name": "Stas Prohetamine",
+    "email": "prohetamine@gmail.com",
+    "url": "https://prohetamine.ru"
+  },
+  "bugs": {
+    "url": "https://github.com/prohetamine/mermaid-store/issues"
+  },
+  "homepage": "https://github.com/prohetamine/mermaid-store#readme",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.2.2",
     "base-64": "^1.0.0",
@@ -32,25 +45,5 @@
     "electron": "^21.2.3",
     "electron-builder": "^23.6.0",
     "eslint": "^8.31.0"
-  },
-  "build": {
-    "appId": "com.electron.prohetamine.mermaid",
-    "compression": "maximum",
-    "mac": {
-      "category": "tool",
-      "icon": "app-icon.png",
-      "target": "dmg",
-      "executableName": "mermaid-store",
-      "asar": false
-    },
-    "dmg": {
-      "icon": "app-icon.png",
-      "background": "background.png",
-      "title": "mermaid-store"
-    },
-    "win": {
-      "icon": "app-icon.png",
-      "target": "nsis"
-    }
   }
 }

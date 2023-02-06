@@ -1,0 +1,36 @@
+{
+  "appId": "com.electron.prohetamine.mermaid",
+  "productName": "Mermaid Store",
+  "copyright": "Mermaid Store. LLC.",
+  "directories": {
+    "app": ".",
+    "output": "dist",
+    "buildResources": "build-res"
+  },
+  "files": [
+    "package.json",
+    "app-icon.png",
+    "back/**/*",
+    "front/build/**/*",
+    "node_modules"
+  ],
+  "compression": "maximum",
+  "dmg": {
+    "icon": "app-icon.png",
+    "background": "background.png"
+  },
+  "mac": {
+    "category": "tool",
+    "icon": "app-icon.png",
+    "target": "dmg",
+    "executableName": "mermaid-store"
+  },
+  "win": {
+    "icon": "app-icon.png",
+    "target": "nsis"
+  },
+  "linux": {
+     "target": "AppImage",
+     "category": "Utility"
+   }
+}

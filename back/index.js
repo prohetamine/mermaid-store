@@ -1,4 +1,4 @@
-const { app, BrowserWindow }  = require('electron')
+const { app, BrowserWindow, ipcMain }  = require('electron')
     , path                    = require('path')
     , express                 = require('express')
     , os                      = require('os')
@@ -38,6 +38,10 @@ const MainWindow = () => {
     if (deviceList && deviceList.length > 0) {
       callback(deviceList[0].deviceId)
     }
+  })
+
+  ipcMain.on('setWindowButtonVisibility', (e, isVisibility) => {
+     win.setWindowButtonVisibility(isVisibility)
   })
 
   win.loadURL(isDev ? 'http://localhost:3000' : 'http://localhost:8989/build')

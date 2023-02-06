@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { io } from 'socket.io-client'
 import { observer } from 'mobx-react-lite'
 import queryString from 'query-string'
@@ -8,6 +8,7 @@ import mainState from './main-state'
 import useGetApps from './hooks/use-get-apps'
 import useGetWorkedApps from './hooks/use-get-worked-apps'
 import useGetRepositorys from './hooks/use-get-repositorys'
+import useWindowButtonVisibility from './hooks/use-window-button-visibility'
 
 import Navigation from './components/navigation'
 import Info from './components/info'
@@ -41,6 +42,8 @@ const Main = observer(() => {
   useEffect(() => {
     mainState.statusWall.activeApplications = workedAppsData.length
   }, [workedAppsData])
+
+  useWindowButtonVisibility()
 
   return (
     <>

@@ -44,6 +44,11 @@ window.onload = function() {
       top: 0px;
     }
 
+    .mermaid-style-bar:active {
+      transition-delay: 0s;
+      top: 0px;
+    }
+
     body:hover > .mermaid-style-bar {
       transition-delay: 0s;
       top: 0px;

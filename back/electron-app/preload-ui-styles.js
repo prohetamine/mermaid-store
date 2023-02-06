@@ -38,6 +38,10 @@ window.onload = function() {
       transition: 0.5s;
     }
 
+    body:hover > .mermaid-style-bar {
+      top: 0px;
+    }
+
     .mermaid-style-wrapper {
       display: flex;
       position: absolute;
@@ -188,7 +192,7 @@ window.onload = function() {
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
 
-  let mouseoutTimeId = null
+  /*let mouseoutTimeId = null
     , mouseoverTimeId = null
 
   barNode.addEventListener('mousedown', () => {
@@ -201,7 +205,7 @@ window.onload = function() {
     }
     mouseoverTimeId = setTimeout(() => {
       barNode.style.top = '0px'
-    }, 1000)
+    }, 100)
   })
 
   window.addEventListener('mouseout', () => {
@@ -211,5 +215,5 @@ window.onload = function() {
     mouseoutTimeId = setTimeout(() => {
       barNode.style.top = '-30px'
     }, 1000)
-  })
+  })*/
 }

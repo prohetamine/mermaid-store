@@ -1,8 +1,5 @@
 const { BrowserWindow, ipcMain }   = require('electron')
     , path                         = require('path')
-    , os                           = require('os')
-
-const isMacOS = os.platform() === 'darwin'
 
 module.exports = () => {
   const win = new BrowserWindow({
@@ -12,17 +9,12 @@ module.exports = () => {
     minWidth: 652,
     maxWidth: 1252,
     frame: false,
-    titleBarStyle: 'hidden',
-    titleBarOverlay: {
-      color: '#4C9AF1',
-      symbolColor: '#fff'
-    },
     fullscreen: false,
     fullscreenable: false,
     alwaysOnTop: false,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: false
     }
   })
 
@@ -34,11 +26,28 @@ module.exports = () => {
     }
   })
 
-  ipcMain.on('setWindowButtonVisibility', (e, isVisibility) => {
-    if (isMacOS) {
-      win.setWindowButtonVisibility(isVisibility)
-    } else {
-      // windows ?????
+  ipcMain.on('exit', event => {
+    if (event.sender.id === win.id) {
+      win.close()
+      global.electronApp.exit()
+    }
+  })
+
+  ipcMain.on('minimize', event => {
+    if (event.sender.id === win.id) {
+      win.minimize()
+    }
+  })
+
+  ipcMain.on('maximize', event => {
+    if (event.sender.id === win.id) {
+      win.maximize()
+    }
+  })
+
+  ipcMain.on('unmaximize', event => {
+    if (event.sender.id === win.id) {
+      win.unmaximize()
     }
   })
 

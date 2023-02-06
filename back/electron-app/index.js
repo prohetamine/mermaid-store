@@ -6,7 +6,9 @@ const { app, BrowserWindow }   = require('electron')
 
 updateElectronApp()
 
-global.isDev = false
+global.isDev = true
+
+global.electronApp = app
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

@@ -2,7 +2,7 @@ const express             = require('express')
     , path                = require('path')
     , NodeMermaid         = require('node-mermaid')
     , NodeMermaidStore    = require('node-mermaid/store')
-    , ControllerElectron  = require('./contoller-electron')
+    , ElectronApp         = require('./electron-app')
 
 ;(async () => {
   const server = express()
@@ -30,7 +30,7 @@ const express             = require('express')
     MS.AppChannel.writeData('status', status)
   )
 
-  const { mainWindow, otherWindow, readmeWindow } = await ControllerElectron()
+  const { mainWindow, otherWindow, readmeWindow } = await ElectronApp()
 
   MS.on('open-window', otherWindow)
   MS.on('open-readme', readmeWindow)

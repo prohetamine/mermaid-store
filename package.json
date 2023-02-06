@@ -38,16 +38,18 @@
     "compression": "maximum",
     "mac": {
       "category": "tool",
+      "icon": "app-icon.png",
       "target": "dmg",
       "executableName": "mermaid-store",
       "asar": false
     },
     "dmg": {
-      "icon": "icon.png",
+      "icon": "app-icon.png",
       "background": "background.png",
       "title": "mermaid-store"
     },
     "win": {
+      "icon": "app-icon.png",
       "target": "nsis"
     }
   }

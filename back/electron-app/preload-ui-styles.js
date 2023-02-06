@@ -38,6 +38,10 @@ window.onload = function() {
       transition: 0.5s;
     }
 
+    .mermaid-style-bar:hover {
+      top: 0px;
+    }
+
     body:hover > .mermaid-style-bar {
       top: 0px;
     }

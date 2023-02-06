@@ -1,10 +1,12 @@
-const { app, BrowserWindow, ipcMain }  = require('electron')
-    , path                    = require('path')
-    , express                 = require('express')
-    , os                      = require('os')
+const { app, BrowserWindow, ipcMain }   = require('electron')
+    , path                              = require('path')
+    , express                           = require('express')
+    , os                                = require('os')
 
-const NodeMermaid             = require('node-mermaid')
-    , NodeMermaidStore        = require('node-mermaid/store')
+const NodeMermaid                       = require('node-mermaid')
+    , NodeMermaidStore                  = require('node-mermaid/store')
+
+require('update-electron-app')()
 
 const isDev = false
 

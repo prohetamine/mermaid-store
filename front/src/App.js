@@ -25,6 +25,10 @@ window.socket = io(
   }
 )
 
+window.socket.on('log', data => {
+  alert(data)
+})
+
 const Main = observer(() => {
   const appsData = useGetApps()
       , workedAppsData = useGetWorkedApps()

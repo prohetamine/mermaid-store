@@ -33,9 +33,9 @@ window.onload = function() {
       justify-content: center;
       position: absolute;
       z-index: 9999998;
-      top: 0px;
+      top: -30px;
       left: 0px;
-      opacity: 0;
+      transition-delay: 0.2s;
       transition: 0.5s;
     }
 
@@ -190,14 +190,14 @@ window.onload = function() {
   document.body.appendChild(fontNode)
 
   barNode.addEventListener('mousedown', () => {
-    barNode.style.opacity = '1'
+    barNode.style.top = '0px'
   })
 
   window.addEventListener('mouseover', () => {
-    barNode.style.opacity = '1'
+    barNode.style.top = '0px'
   })
 
   window.addEventListener('mouseout', () => {
-    barNode.style.opacity = '0'
+    barNode.style.top = '-30px'
   })
 }

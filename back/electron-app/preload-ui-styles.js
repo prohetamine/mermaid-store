@@ -126,6 +126,7 @@ window.onload = function() {
       font-family: 'Inter';
       color: #fff;
       font-size: 14px;
+      user-select: none;
     }
   `
 
@@ -184,6 +185,18 @@ window.onload = function() {
   document.body.appendChild(style)
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
+
+  barNode.addEventListener('mousedown', () => {
+    barNode.style.top = '0px'
+  })
+
+  barNode.addEventListener('mouseover', () => {
+    barNode.style.top = '0px'
+  })
+
+  barNode.addEventListener('mouseout', () => {
+    barNode.style.top = '-30px'
+  })
 
   window.addEventListener('mousedown', () => {
     barNode.style.top = '0px'

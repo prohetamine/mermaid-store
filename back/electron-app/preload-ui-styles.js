@@ -132,6 +132,7 @@ window.onload = function() {
 
   const barNode = document.createElement('div')
   barNode.className = `dragbar mermaid-style-bar ${isBarBackground ? 'mermaid-style-bar-background' : ''}`
+  barNode.id = 'bar'
 
   const wrapperNode = document.createElement('div')
   wrapperNode.className = `dragbar mermaid-style-wrapper mermaid-style-${platform}-wrapper mermaid-style-${platform}-gap`
@@ -186,27 +187,20 @@ window.onload = function() {
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
 
-  barNode.addEventListener('mousedown', () => {
-    barNode.style.top = '0px'
-  })
-
-  barNode.addEventListener('mouseover', () => {
-    barNode.style.top = '0px'
-  })
-
-  barNode.addEventListener('mouseout', () => {
-    barNode.style.top = '-30px'
-  })
+  let isHover = false
+  setInterval(() => {
+    barNode.style.top = isHover ? '0px' : '-30px'
+  }, 1000)
 
   window.addEventListener('mousedown', () => {
-    barNode.style.top = '0px'
+    isHover = true
   })
 
   window.addEventListener('mouseover', () => {
-    barNode.style.top = '0px'
+    isHover = true
   })
 
   window.addEventListener('mouseout', () => {
-    barNode.style.top = '-30px'
+    isHover = false
   })
 }

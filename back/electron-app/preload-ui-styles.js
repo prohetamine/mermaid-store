@@ -36,13 +36,16 @@ window.onload = function() {
       top: -30px;
       left: 0px;
       transition: 0.5s;
+      transition-delay: 2s;
     }
 
     .mermaid-style-bar:hover {
+      transition-delay: 0s;
       top: 0px;
     }
 
     body:hover > .mermaid-style-bar {
+      transition-delay: 0s;
       top: 0px;
     }
 

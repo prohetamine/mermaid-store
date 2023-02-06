@@ -1,6 +1,6 @@
 {
   "name": "mermaid-store",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Webcam Tool",
   "main": "back/index.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "html-escaper": "^3.0.3",
     "http": "^0.0.1-security",
     "kill-port": "^2.0.1",
-    "node-mermaid": "^2.2.321",
+    "node-mermaid": "^2.2.4",
     "open": "^8.4.0",
     "path": "^0.12.7",
     "sleep-promise": "^9.1.0",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "electron": "^21.2.3",
     "electron-builder": "^23.6.0",
+    "electron-updater": "^5.3.0",
     "eslint": "^8.31.0"
   }
 }

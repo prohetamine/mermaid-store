@@ -192,7 +192,7 @@ window.onload = function() {
     barNode.style.top = isHover ? '0px' : '-30px'
   }, 1000)
 
-  window.addEventListener('mousedown', () => {
+  barNode.addEventListener('mousedown', () => {
     isHover = true
   })
 

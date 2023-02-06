@@ -174,6 +174,10 @@ window.onload = function() {
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
 
+  window.addEventListener('mousedown', () => {
+    barNode.style.top = '0px'
+  })
+
   window.addEventListener('mouseover', () => {
     barNode.style.top = '0px'
   })

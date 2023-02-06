@@ -11,7 +11,7 @@ module.exports = windowConfig => {
       contextIsolation: false,
       preload: path.join(__dirname, 'preload-ui-styles.js')
     },
-    frame: false,
+    frame: false
   }
 
   const win = new BrowserWindow(config)

@@ -187,20 +187,28 @@ window.onload = function() {
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
 
-  let isHover = false
-  setInterval(() => {
-    barNode.style.top = isHover ? '0px' : '-30px'
-  }, 1000)
+  let mouseoutTimeId = null
+    , mouseoverTimeId = null
 
   barNode.addEventListener('mousedown', () => {
-    isHover = true
+    barNode.style.top = '0px'
   })
 
   window.addEventListener('mouseover', () => {
-    isHover = true
+    if (!mouseoverTimeId) {
+      clearTimeout(mouseoverTimeId)
+    }
+    mouseoverTimeId = setTimeout(() => {
+      barNode.style.top = '0px'
+    }, 100)
   })
 
   window.addEventListener('mouseout', () => {
-    isHover = false
+    if (!mouseoutTimeId) {
+      clearTimeout(mouseoutTimeId)
+    }
+    mouseoutTimeId = setTimeout(() => {
+      barNode.style.top = '-30px'
+    }, 100)
   })
 }

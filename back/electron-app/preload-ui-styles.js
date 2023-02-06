@@ -189,15 +189,13 @@ window.onload = function() {
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
 
-  barNode.addEventListener('mousedown', () => {
+  document.body.setAttribute('tabIndex', '-1')
+
+  document.body.addEventListener('focus', () => {
     barNode.style.top = '0px'
   })
 
-  window.addEventListener('mouseover', () => {
-    barNode.style.top = '0px'
-  })
-
-  window.addEventListener('mouseout', () => {
+  document.body.addEventListener('blur', () => {
     barNode.style.top = '-30px'
   })
 }

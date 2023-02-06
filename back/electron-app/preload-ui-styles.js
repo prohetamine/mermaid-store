@@ -161,6 +161,17 @@ window.onload = function() {
   titleNode.className = 'mermaid-style-title'
   titleNode.innerText = document.querySelector('title').innerHTML
 
+  const handleResize = () => {
+    if (window.innerWidth < 400) {
+      titleNode.style.display = 'none'
+    } else {
+      titleNode.style.display = 'block'
+    }
+  }
+
+  handleResize()
+  window.addEventListener('resize', handleResize)
+
   wrapperNode.appendChild(closeButtonNode)
   wrapperNode.appendChild(minimizeButtonNode)
   wrapperNode.appendChild(maximizeButtonNode)

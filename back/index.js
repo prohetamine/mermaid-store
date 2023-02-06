@@ -41,7 +41,13 @@ const MainWindow = () => {
   })
 
   ipcMain.on('setWindowButtonVisibility', (e, isVisibility) => {
-     win.setWindowButtonVisibility(isVisibility)
+    try {
+      win.setWindowButtonVisibility(isVisibility)
+    } catch (e) {
+      win.setTitleBarOverlay({
+        height: 0
+      })
+    }
   })
 
   win.loadURL(isDev ? 'http://localhost:3000' : 'http://localhost:8989/build')

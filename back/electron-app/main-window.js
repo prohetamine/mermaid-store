@@ -3,7 +3,7 @@ const { BrowserWindow, ipcMain }   = require('electron')
 
 module.exports = () => {
   const win = new BrowserWindow({
-    icon: path.join(__dirname, 'app-icon.png'),
+    icon: path.join(__dirname, '..', '..', 'app-icon.png'),
     width: 852,
     height: 700,
     minWidth: 652,

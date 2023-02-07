@@ -5,6 +5,7 @@ module.exports = windowConfig => {
   const { url, proportions } = windowConfig
 
   const config = {
+    icon: path.join(__dirname, '..', '..', 'app-icon.png'),
     ...windowConfig,
     webPreferences: {
       nodeIntegration: true,

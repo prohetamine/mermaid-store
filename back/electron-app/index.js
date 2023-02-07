@@ -1,10 +1,10 @@
 const { app, BrowserWindow }   = require('electron')
-    , updateElectronApp        = require('update-electron-app')
+    //, updateElectronApp        = require('update-electron-app')
     , readmeWindow             = require('./readme-window')
     , otherWindow              = require('./other-window')
     , mainWindow               = require('./main-window')
 
-updateElectronApp()
+//updateElectronApp()
 
 global.isDev = false
 

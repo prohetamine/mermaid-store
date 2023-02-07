@@ -7,7 +7,8 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder -mwl",
-    "publish": "electron-builder -mwl --publish always"
+    "dev": "electron-builder -m",
+    "publish": "electron-builder -mwl -p always"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,6 @@
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "electron-npm-install": "^0.1.0",
-    "electron-reloader": "^1.2.3",
     "express": "^4.18.2",
     "html-escaper": "^3.0.3",
     "http": "^0.0.1-security",

@@ -1,17 +1,21 @@
-const { BrowserWindow, ipcMain }   = require('electron')
-    , path                         = require('path')
+const { BrowserWindow, ipcMain } = require('electron')
+    , path                       = require('path')
 
-module.exports = url => {
-  const win = new BrowserWindow({
-    icon: path.join(__dirname, '..', '..', 'icon.png'),
-    width: 900,
-    height: 700,
-    frame: false,
+module.exports = windowConfig => {
+  const { url, proportions } = windowConfig
+
+  const config = {
+    icon: path.join(__dirname, '..', '..', '..', 'resources', 'icon.png'),
+    ...windowConfig,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
-    }
-  })
+      contextIsolation: false,
+      preload: path.join(__dirname, 'preload-ui-styles.js')
+    },
+    frame: false
+  }
+
+  const win = new BrowserWindow(config)
 
   const minimize = event => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
@@ -46,9 +50,17 @@ module.exports = url => {
   ipcMain.on('unmaximize', unmaximize)
   ipcMain.on('exit', close)
 
-  win.loadURL(
-    global.isDev
-      ? `http://localhost:3000?readme=${url}`
-      : `http://localhost:8989/build?readme=${url}`
-  )
+  if (proportions) {
+    let width = 0
+
+    win.on('will-resize', (event, newBounds) => {
+      width = newBounds.width
+    })
+
+    win.on('resized', () => {
+      win.setSize(width, parseInt(width / 1.79545455), true)
+    })
+  }
+
+  win.loadURL(url)
 }

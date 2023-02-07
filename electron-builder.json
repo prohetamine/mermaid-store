@@ -10,12 +10,12 @@
   },
   "compression": "maximum",
   "dmg": {
-    "icon": "app-icon.png",
-    "background": "background.png"
+    "icon": "resources/icon.png",
+    "background": "resources/background.png"
   },
   "mac": {
     "category": "tool",
-    "icon": "app-icon.png",
+    "icon": "resources/icon.png",
     "target": "dmg"
   },
   "win": {
@@ -24,7 +24,7 @@
   },
   "linux": {
      "target": "deb",
-     "icon": "app-icon.png",
+     "icon": "resources/linux-icon.png",
      "category": "Utility"
    }
 }

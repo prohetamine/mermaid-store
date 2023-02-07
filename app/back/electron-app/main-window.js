@@ -3,12 +3,14 @@ const { BrowserWindow, ipcMain }   = require('electron')
 
 module.exports = () => {
   const win = new BrowserWindow({
-    icon: path.join(__dirname, '..', '..', 'app-icon.png'),
+    icon: path.join(__dirname, '..', '..', '..', 'resources', 'app-icon.png'),
     width: 852,
     height: 700,
     minWidth: 652,
     maxWidth: 1252,
     frame: false,
+    show: false,
+    maximizable:false,
     fullscreen: false,
     fullscreenable: false,
     alwaysOnTop: false,
@@ -16,6 +18,12 @@ module.exports = () => {
       nodeIntegration: true,
       contextIsolation: false
     }
+  })
+
+  win.once('ready-to-show', () => {
+    setTimeout(() => {
+      win.show()
+    }, 2500)
   })
 
   win.webContents.on('select-bluetooth-device', (event, deviceList, callback) => {

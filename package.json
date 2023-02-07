@@ -1,6 +1,6 @@
 {
   "name": "mermaid-store",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Webcam Tool",
   "main": "back/index.js",
   "scripts": {

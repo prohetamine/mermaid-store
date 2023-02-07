@@ -189,8 +189,6 @@ window.onload = function() {
   document.body.appendChild(barNode)
   document.body.appendChild(fontNode)
 
-  document.body.setAttribute('tabIndex', '-1')
-
   document.body.addEventListener('focus', () => {
     barNode.style.top = '0px'
   })
@@ -198,4 +196,7 @@ window.onload = function() {
   document.body.addEventListener('blur', () => {
     barNode.style.top = '-30px'
   })
+
+  document.body.setAttribute('tabIndex', '-1')
+  document.body.focus()
 }

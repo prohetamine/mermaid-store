@@ -37,6 +37,10 @@ module.exports = url => {
     }
   }
 
+  const link = () => {
+    win.setSize(200, 200, true)
+  }
+
   const close = event => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
       ipcMain.removeListener('exit', close)
@@ -44,6 +48,7 @@ module.exports = url => {
       ipcMain.removeListener('maximize', unmaximize)
       ipcMain.removeListener('unmaximize', unmaximize)
       ipcMain.removeListener('isMaximized', isMaximized)
+      ipcMain.removeListener('link', link)
       win.close()
     }
   }
@@ -52,6 +57,7 @@ module.exports = url => {
   ipcMain.on('maximize', maximize)
   ipcMain.on('unmaximize', unmaximize)
   ipcMain.on('isMaximized', isMaximized)
+  ipcMain.on('link', link)
   ipcMain.on('exit', close)
 
   win.loadURL(

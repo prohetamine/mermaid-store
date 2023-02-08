@@ -50,6 +50,7 @@ const Body = styled.div`
   box-shadow: 0px 1px 20px rgba(23, 23, 23, 0.15);
   border-radius: 8px;
   z-index: 9999;
+  user-select: none;
 `
 
 const Item = styled.div`
@@ -64,6 +65,7 @@ const Item = styled.div`
   gap: 15px;
   cursor: pointer;
   background: #FFFFFF;
+  user-select: none;
 
   &:hover {
     background: #F6F6F6;

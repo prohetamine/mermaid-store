@@ -46,6 +46,11 @@
     window.addEventListener('click', () => {
       window.close()
     })
+
+    try {
+      const { ipcRenderer } = require('electron')
+      ipcRenderer.send('link')
+    } catch (e) {}
   </script>
 </body>
 </html>

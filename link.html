@@ -19,23 +19,25 @@
     }
 
     .img {
-      width: 20vh;
-      height: 20vh;
+      width: 0vh;
+      height: 0vh;
+      max-width: 160px;
+      max-height: 160px;
       opacity: 0;
-      transform: scale(0);
       background-image: url(resources/icon.png);
       background-size: cover;
-      transition: 2.5s;
       animation: animation 2.5s forwards;
     }
 
     @keyframes animation {
       0% {
-        opacity: 0;
+        width: 0vh;
+        height: 0vh;
         transform: scale(0);
       }
       100% {
-        opacity: 1;
+        width: 80vh;
+        height: 80vh;
         transform: scale(1);
       }
     }
@@ -51,11 +53,6 @@
     try {
       const { ipcRenderer } = require('electron')
       ipcRenderer.send('link')
-      const img = document.querySelector('.img')
-      img.style.transform = 'scale(4)';
-      img.style.opacity = '1';
-      img.style.animation = 'none';
-
     } catch (e) {}
   </script>
 </body>

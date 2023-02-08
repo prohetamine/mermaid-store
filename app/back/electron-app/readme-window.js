@@ -1,5 +1,6 @@
 const { BrowserWindow, ipcMain }   = require('electron')
     , path                         = require('path')
+    , qs                           = require('querystringify')
 
 module.exports = ({ search }) => url => {
   const win = new BrowserWindow({
@@ -38,10 +39,13 @@ module.exports = ({ search }) => url => {
     }
   }
 
-  const link = event => {
+  const link = (event, data) => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
-      console.log(event)
-      //search(event)
+      const query = qs.parse(data)
+
+      if (query.search) {
+        search(query.search)
+      }
     }
   }
 

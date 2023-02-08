@@ -31,12 +31,19 @@ module.exports = url => {
     }
   }
 
+  const isMaximized = event => {
+    if (!win.isDestroyed() && event.sender.id === win.id) {
+      event.reply('isMaximized', win.isMaximized())
+    }
+  }
+
   const close = event => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
       ipcMain.removeListener('exit', close)
       ipcMain.removeListener('minimize', minimize)
       ipcMain.removeListener('maximize', unmaximize)
       ipcMain.removeListener('unmaximize', unmaximize)
+      ipcMain.removeListener('isMaximized', isMaximized)
       win.close()
     }
   }
@@ -44,6 +51,7 @@ module.exports = url => {
   ipcMain.on('minimize', minimize)
   ipcMain.on('maximize', maximize)
   ipcMain.on('unmaximize', unmaximize)
+  ipcMain.on('isMaximized', isMaximized)
   ipcMain.on('exit', close)
 
   win.loadURL(

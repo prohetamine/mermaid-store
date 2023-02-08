@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import mainState from './../main-state'
@@ -64,6 +65,12 @@ const Input = styled.input`
 `
 
 const Navigation = observer(() => {
+  useEffect(() => {
+    window.socket.on('search', value => {
+      mainState.search = value
+    })
+  }, [])
+
   return (
     <Body className='dragbar'>
       <Wrapper>

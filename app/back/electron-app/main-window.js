@@ -3,7 +3,7 @@ const { BrowserWindow, ipcMain }   = require('electron')
 
 module.exports = () => {
   const win = new BrowserWindow({
-    icon: path.join(__dirname, '..', '..', '..', 'resources', 'app-icon.png'),
+    icon: path.join(__dirname, '..', '..', '..', 'resources', 'icon.png'),
     width: 852,
     height: 700,
     minWidth: 652,
@@ -47,25 +47,13 @@ module.exports = () => {
     }
   })
 
-  ipcMain.on('maximize', event => {
-    if (event.sender.id === win.id) {
-      win.maximize()
-    }
-  })
-
-  ipcMain.on('unmaximize', event => {
-    if (event.sender.id === win.id) {
-      win.unmaximize()
-    }
-  })
-
   win.loadURL(global.isDev ? 'http://localhost:3000' : 'http://localhost:8989/build')
 
-  const sizes = Array(20).fill(652).map((minimalWidth, i) => minimalWidth + (200 * i))
+  const sizes = Array(5).fill(652).map((minimalWidth, i) => minimalWidth + (200 * i))
 
   const size = {
     width: 852,
-    height: 600
+    height: 700
   }
 
   win.on('will-resize', (event, newBounds) => {

@@ -2,13 +2,18 @@
   "appId": "com.electron.prohetamine.mermaid",
   "productName": "Mermaid Store",
   "copyright": "Mermaid Store. LLC.",
-  "asar": false,
   "directories": {
     "app": ".",
     "output": "dist",
     "buildResources": "build-res"
   },
   "compression": "maximum",
+  "protocols": {
+    "name": "foobar-protocol",
+    "schemes": [
+      "foobar"
+    ]
+  },
   "dmg": {
     "icon": "resources/icon.png",
     "background": "resources/background.png"
@@ -19,12 +24,12 @@
     "target": "dmg"
   },
   "win": {
-    "icon": "app-icon.png",
+    "icon": "resources/icon.png",
     "target": "nsis"
   },
   "linux": {
-     "target": "deb",
-     "icon": "resources/linux-icon.png",
-     "category": "Utility"
-   }
+    "target": "deb",
+    "icon": "resources/icon.png",
+    "category": "Utility"
+  }
 }

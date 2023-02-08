@@ -15,6 +15,10 @@ import Info from './components/info'
 import ReadmeViewer from './components/readme-viewer'
 import AppCards from './components/app-cards'
 import AppSearchCards from './components/app-search-cards'
+import EmptyCards from './components/empty-cards'
+
+import findRepositoryImage from './assets/images/find-repository.svg'
+import findAppImage from './assets/images/find-app.svg'
 
 window.socket = io(
   `http://localhost:6969?platform=store-channel`,
@@ -58,9 +62,17 @@ const Main = observer(() => {
           ? (
             <AppSearchCards />
           )
-          : (
-            <AppCards appsData={appsData} />
-          )
+          : appsData.length > 0
+              ? (
+                <AppCards appsData={appsData} />
+              )
+              : repositorysData.length > 0
+                  ? (
+                    <EmptyCards image={findAppImage} label="What's next?" />
+                  )
+                  : (
+                    <EmptyCards image={findRepositoryImage} label="What's next?" />
+                  )
       }
     </>
   )

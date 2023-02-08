@@ -1,12 +1,12 @@
 const { app, BrowserWindow }   = require('electron')
-    //, updateElectronApp        = require('update-electron-app')
+    //, updateElectronApp       = require('update-electron-app')
     , readmeWindow             = require('./readme-window')
     , otherWindow              = require('./other-window')
     , mainWindow               = require('./main-window')
-
+    , browserProtocol          = require('./browser-protocol')
 //updateElectronApp()
 
-global.isDev = false
+global.isDev = true
 
 global.electronApp = app
 
@@ -29,6 +29,7 @@ module.exports = async () => {
         }
       })
     },
+    browserProtocol,
     otherWindow,
     readmeWindow
   }

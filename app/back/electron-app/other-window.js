@@ -1,5 +1,5 @@
-const { BrowserWindow, ipcMain } = require('electron')
-    , path                       = require('path')
+const { BrowserWindow, ipcMain }  = require('electron')
+    , path                        = require('path')
 
 module.exports = windowConfig => {
   const { url, proportions } = windowConfig
@@ -35,12 +35,19 @@ module.exports = windowConfig => {
     }
   }
 
+  const isMaximized = event => {
+    if (!win.isDestroyed() && event.sender.id === win.id) {
+      event.reply('isMaximized', win.isMaximized())
+    }
+  }
+
   const close = event => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
       ipcMain.removeListener('exit', close)
       ipcMain.removeListener('minimize', minimize)
       ipcMain.removeListener('maximize', unmaximize)
       ipcMain.removeListener('unmaximize', unmaximize)
+      ipcMain.removeListener('isMaximized', isMaximized)
       win.close()
     }
   }
@@ -48,6 +55,7 @@ module.exports = windowConfig => {
   ipcMain.on('minimize', minimize)
   ipcMain.on('maximize', maximize)
   ipcMain.on('unmaximize', unmaximize)
+  ipcMain.on('isMaximized', isMaximized)
   ipcMain.on('exit', close)
 
   if (proportions) {
@@ -58,7 +66,9 @@ module.exports = windowConfig => {
     })
 
     win.on('resized', () => {
-      win.setSize(width, parseInt(width / 1.79545455), true)
+      if (!win.isMaximized()) {
+        win.setSize(width, parseInt(width / 1.79545455), true)
+      }
     })
   }
 

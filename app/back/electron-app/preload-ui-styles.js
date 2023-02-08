@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = () => {
   const { ipcRenderer } = require('electron')
 
   let isMacOS = require('os').platform() === 'darwin'
@@ -48,6 +48,10 @@ window.onload = function() {
       left: 8px;
     }
 
+    .mermaid-style-mac-os-wrapper-other {
+      left: 8px;
+    }
+
     .mermaid-style-windows-wrapper {
       right: 0px;
     }
@@ -62,6 +66,18 @@ window.onload = function() {
 
     .mermaid-style-mac-os-wrapper:hover > *:nth-child(3) {
       background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyIiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iIzJDQTJERiIvPgo8cGF0aCBkPSJNMyA1LjIyNDI2QzMgNC45NTY5OSAzLjMyMzE0IDQuODIzMTQgMy41MTIxMyA1LjAxMjEzTDYuOTg3ODcgOC40ODc4N0M3LjE3Njg2IDguNjc2ODYgNy4wNDMwMSA5IDYuNzc1NzQgOUgzLjNDMy4xMzQzMSA5IDMgOC44NjU2OSAzIDguN1Y1LjIyNDI2WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTkgNi43NzU3NEM5IDcuMDQzMDEgOC42NzY4NiA3LjE3Njg2IDguNDg3ODcgNi45ODc4N0w1LjAxMjEzIDMuNTEyMTNDNC44MjMxNCAzLjMyMzE0IDQuOTU2OTkgMyA1LjIyNDI2IDNMOC43IDNDOC44NjU2OSAzIDkgMy4xMzQzMSA5IDMuM1Y2Ljc3NTc0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==");
+    }
+
+    .mermaid-style-mac-os-wrapper-other:hover > *:nth-child(1) {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyIiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iIzJDQTJERiIvPgo8cmVjdCB4PSIyLjgxODEyIiB5PSI4LjQ3NDg4IiB3aWR0aD0iOCIgaGVpZ2h0PSIxIiByeD0iMC41IiB0cmFuc2Zvcm09InJvdGF0ZSgtNDUgMi44MTgxMiA4LjQ3NDg4KSIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iOC40NzQ5OCIgeT0iOS4xODE5OCIgd2lkdGg9IjgiIGhlaWdodD0iMSIgcng9IjAuNSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEzNSA4LjQ3NDk4IDkuMTgxOTgpIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
+    }
+
+    .mermaid-style-mac-os-wrapper-other:hover > *:nth-child(2) {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyIiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iIzJDQTJERiIvPgo8cmVjdCB4PSIyIiB5PSI1LjUiIHdpZHRoPSI4IiBoZWlnaHQ9IjEiIHJ4PSIwLjUiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=");
+    }
+
+    .mermaid-style-mac-os-wrapper-other:hover > *:nth-child(3) {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyIiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iIzJDQTJERiIvPgo8cGF0aCBkPSJNNS43NSAxMC4wMjU3QzUuNzUgMTAuMjkzIDUuNDI2ODYgMTAuNDI2OSA1LjIzNzg3IDEwLjIzNzlMMS43NjIxMyA2Ljc2MjEzQzEuNTczMTQgNi41NzMxNCAxLjcwNjk5IDYuMjUgMS45NzQyNiA2LjI1SDUuNDVDNS42MTU2OSA2LjI1IDUuNzUgNi4zODQzMSA1Ljc1IDYuNTVWMTAuMDI1N1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik02LjI1IDEuOTc0MjZDNi4yNSAxLjcwNjk5IDYuNTczMTQgMS41NzMxNCA2Ljc2MjEzIDEuNzYyMTNMMTAuMjM3OSA1LjIzNzg3QzEwLjQyNjkgNS40MjY4NiAxMC4yOTMgNS43NSAxMC4wMjU3IDUuNzVINi41NUM2LjM4NDMxIDUuNzUgNi4yNSA1LjYxNTY5IDYuMjUgNS40NVYxLjk3NDI2WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==");
     }
 
     .mermaid-style-windows-wrapper {
@@ -124,6 +140,14 @@ window.onload = function() {
       background-color: #0000001f;
     }
 
+    .mermaid-style-windows-button-three-other {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAzNiAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMTMuNSIgeT0iMTEuNSIgd2lkdGg9IjciIGhlaWdodD0iNyIgc3Ryb2tlPSJ3aGl0ZSIvPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE2IDEwSDIyVjE3SDIwVjE4SDIySDIzVjE3VjEwVjlIMjJIMTZIMTVWMTBWMTJIMTZWMTBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
+    }
+
+    .mermaid-style-windows-button-three-other:hover {
+      background-color: #0000001f;
+    }
+
     .mermaid-style-title {
       font-family: 'Inter';
       color: #fff;
@@ -141,20 +165,45 @@ window.onload = function() {
 
   const closeButtonNode = document.createElement('div')
   closeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-one`
-  closeButtonNode.addEventListener('click', () => {
-    ipcRenderer.send('exit');
-  })
+  closeButtonNode.addEventListener('click', () =>
+    ipcRenderer.send('exit')
+  )
 
   const minimizeButtonNode = document.createElement('div')
   minimizeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-two`
-  minimizeButtonNode.addEventListener('click', () => {
-    ipcRenderer.send('minimize');
-  })
+  minimizeButtonNode.addEventListener('click', () =>
+    ipcRenderer.send('minimize')
+  )
 
+  let stateIsMaximized = false
   const maximizeButtonNode = document.createElement('div')
   maximizeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-three`
   maximizeButtonNode.addEventListener('click', () => {
-    ipcRenderer.send('maximize');
+    if (stateIsMaximized) {
+      ipcRenderer.send('unmaximize')
+    } else {
+      ipcRenderer.send('maximize')
+    }
+    ipcRenderer.send('isMaximized')
+  })
+
+  ipcRenderer.on('isMaximized', (_, isMaximized) => {
+    stateIsMaximized = isMaximized
+
+    if (isMacOS) {
+      if (isMaximized) {
+        wrapperNode.className = `dragbar mermaid-style-wrapper mermaid-style-${platform}-wrapper-other mermaid-style-${platform}-gap`
+      } else {
+        wrapperNode.className = `dragbar mermaid-style-wrapper mermaid-style-${platform}-wrapper mermaid-style-${platform}-gap`
+      }
+
+    } else {
+      if (isMaximized) {
+        maximizeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-three-other`
+      } else {
+        maximizeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-three`
+      }
+    }
   })
 
   const fontNode = document.createElement('link')

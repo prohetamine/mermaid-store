@@ -2,7 +2,11 @@ import { observer } from 'mobx-react-lite'
 import useGetRepositorys from './../hooks/use-get-repositorys'
 import useFindRepository from './../hooks/use-find-repository'
 import AppSearchCard from './app-search-card'
+import EmptyCards from './empty-cards'
+
 import mainState from './../main-state'
+
+import notFoundImage from './../assets/images/not-found.svg'
 
 const AppSearchCards = observer(() => {
   const repositorys = useGetRepositorys()
@@ -53,12 +57,20 @@ const AppSearchCards = observer(() => {
                                   }
                                 )
 
-  return repositorysData
-            .map(
-              (repositoryData, key, stack) => (
-                <AppSearchCard key={key} repositoryData={repositoryData} isLine={key < stack.length - 1} />
-              )
-            )
+  return repositorysData.length > 0
+            ? repositorysData
+                .map(
+                  (repositoryData, key, stack) => (
+                    <AppSearchCard key={key} repositoryData={repositoryData} isLine={key < stack.length - 1} />
+                  )
+                )
+            : findRepositoryData === null
+                ? (
+                  <EmptyCards image={notFoundImage} label="You didn't find anything. What's next?" />
+                )
+                : (
+                  null
+                )
 })
 
 export default AppSearchCards

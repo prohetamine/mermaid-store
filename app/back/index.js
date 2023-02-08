@@ -30,7 +30,11 @@ const express             = require('express')
     MS.AppChannel.writeData('status', status)
   )
 
-  const { mainWindow, otherWindow, readmeWindow } = await ElectronApp()
+  const { mainWindow, otherWindow, readmeWindow, browserProtocol } = await ElectronApp()
+
+  browserProtocol({
+    search: MS.search
+  })
 
   MS.on('open-window', otherWindow)
   MS.on('open-readme', readmeWindow)

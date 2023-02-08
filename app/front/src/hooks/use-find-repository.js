@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 
-const useFindRepository = (search) => {
-  const [findRepository, setFindRepository] = useState(null)
+const useFindRepository = search => {
+  const [findRepository, setFindRepository] = useState(false)
 
   useEffect(() => {
     if (search.length > 5) {
       const timeId = setTimeout(() => {
-        window.socket.emit('repository-find', search)
+        const fixSearch = search.match(/\.git$/)
+                            ? search
+                            : search + '.git'
+
+        window.socket.emit('repository-find', fixSearch)
       }, 100)
 
       const handler = repository => setFindRepository(repository)

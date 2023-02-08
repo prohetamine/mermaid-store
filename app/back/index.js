@@ -3,18 +3,12 @@ const express             = require('express')
     , NodeMermaid         = require('node-mermaid')
     , NodeMermaidStore    = require('node-mermaid/store')
     , ElectronApp         = require('./electron-app')
-    , kill                = require('kill-port')
+    , fixForWindows       = require('./libs/fix-for-windows')
+
 ;(async () => {
   const server = express()
 
-  // fix for windows
-  try {
-    await kill(6767, 'tcp')
-  } catch (e) {}
-
-  try {
-    await kill(6767, 'udp')
-  } catch (e) {}
+  await fixForWindows()
 
   const NME = NodeMermaid({
     port: 6767,
@@ -46,7 +40,7 @@ const express             = require('express')
   }
 
   browserProtocol(options)
-  
+
   const _readmeWindow = readmeWindow(options)
 
   MS.on('open-window', otherWindow)

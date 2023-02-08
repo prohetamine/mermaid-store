@@ -9,7 +9,7 @@ const { app, BrowserWindow, dialog }   = require('electron')
 
 //updateElectronApp()
 
-global.isDev = true
+global.isDev = false
 
 global.electronApp = app
 
@@ -76,6 +76,14 @@ module.exports = async () => {
       })
 
       await app.whenReady()
+
+      if (process.defaultApp) {
+        if (process.argv.length >= 2) {
+          app.setAsDefaultProtocolClient('mermaid-store', process.execPath, [path.resolve(process.argv[1])])
+        }
+      } else {
+        app.setAsDefaultProtocolClient('marmaid-store')
+      }
 
       return {
         mainWindow: () => {

@@ -19,11 +19,10 @@
     }
 
     .img {
-      width: 0vh;
-      height: 0vh;
-      max-width: 160px;
-      max-height: 160px;
+      width: 20vh;
+      height: 20vh;
       opacity: 0;
+      scale: 0;
       background-image: url(resources/icon.png);
       background-size: cover;
       animation: animation 2.5s forwards;
@@ -31,29 +30,27 @@
 
     @keyframes animation {
       0% {
-        width: 0vh;
-        height: 0vh;
-        transform: scale(0);
+        opacity: 0;
+        scale: 0;
       }
       100% {
-        width: 80vh;
-        height: 80vh;
-        transform: scale(1);
+        opacity: 1;
+        scale: 1;
       }
     }
   </style>
   <div class="img"></div>
   <script>
-    window.location.href = `mermaid-store://${window.location.search}`
-
-    window.addEventListener('click', () => {
-      window.close()
-    })
-
     try {
       const { ipcRenderer } = require('electron')
-      ipcRenderer.send('link')
-    } catch (e) {}
+      ipcRenderer.send('link', window.location.search)
+
+      setTimeout(() => {
+        window.close()
+      }, 500)
+    } catch (e) {
+      window.location.href = `mermaid-store://${window.location.search}`
+    }
   </script>
 </body>
 </html>

@@ -1,12 +1,13 @@
 const { BrowserWindow, ipcMain }   = require('electron')
     , path                         = require('path')
 
-module.exports = url => {
+module.exports = ({ search }) => url => {
   const win = new BrowserWindow({
     icon: path.join(__dirname, '..', '..', '..', 'resources', 'icon.png'),
     width: 900,
     height: 700,
     frame: false,
+    center: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
@@ -39,7 +40,8 @@ module.exports = url => {
 
   const link = event => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
-      win.setSize(200, 200, true)
+      console.log(event)
+      //search(event)
     }
   }
 

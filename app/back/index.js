@@ -41,12 +41,16 @@ const express             = require('express')
 
   const { mainWindow, otherWindow, readmeWindow, browserProtocol } = await ElectronApp()
 
-  browserProtocol({
+  const options = {
     search: MS.search
-  })
+  }
+
+  browserProtocol(options)
+  
+  const _readmeWindow = readmeWindow(options)
 
   MS.on('open-window', otherWindow)
-  MS.on('open-readme', readmeWindow)
+  MS.on('open-readme', _readmeWindow)
 
   server.use('/build', express.static(path.resolve(__dirname, '..', 'front', 'build')))
   server.listen(8989, () => mainWindow())

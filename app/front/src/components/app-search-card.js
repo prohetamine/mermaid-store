@@ -212,9 +212,7 @@ const AppSearchCard = ({ repositoryData, isLine }) => {
                 setShowContextMenu(false)
               }
 
-              alert(type)
               if (type === 'readme') {
-                alert(repositoryData.readme)
                 window.socket.emit('open-readme', repositoryData.readme)
                 setShowContextMenu(false)
               }

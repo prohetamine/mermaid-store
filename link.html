@@ -18,11 +18,13 @@
       margin: 0px;
     }
 
-    img {
+    .img {
       width: 20vh;
       height: 20vh;
       opacity: 0;
       scale: 0;
+      background-image: url(resources/icon.png);
+      background-size: cover;
       animation: animation 2.5s forwards;
     }
 
@@ -37,12 +39,13 @@
       }
     }
   </style>
-  <img src="resources/icon.png" alt="logo">
+  <div class="img"></div>
   <script>
     window.location.href = `mermaid-store://${window.location.search}`
-    setInterval(() => {
+
+    window.addEventListener('click', () => {
       window.close()
-    }, 2500)
+    })
   </script>
 </body>
 </html>

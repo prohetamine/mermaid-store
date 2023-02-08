@@ -40,7 +40,9 @@
   <img src="resources/icon.png" alt="logo">
   <script>
     window.location.href = `mermaid-store://${window.location.search}`
-    window.close()
+    setInterval(() => {
+      window.close()
+    }, 2500)
   </script>
 </body>
 </html>

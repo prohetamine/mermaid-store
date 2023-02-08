@@ -34,7 +34,7 @@
     "html-escaper": "^3.0.3",
     "http": "^0.0.1-security",
     "kill-port": "^2.0.1",
-    "node-mermaid": "^2.2.6",
+    "node-mermaid": "2.2.71",
     "open": "^8.4.0",
     "path": "^0.12.7",
     "query-string": "^8.1.0",

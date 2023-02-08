@@ -212,9 +212,10 @@ const AppSearchCard = ({ repositoryData, isLine }) => {
                 setShowContextMenu(false)
               }
 
+              alert(type)
               if (type === 'readme') {
-                console.log(repositoryData.link+'/readme.md')
-                window.socket.emit('open-readme', 'https://raw.githubusercontent.com/prohetamine/official/main/README.md')
+                alert(repositoryData.readme)
+                window.socket.emit('open-readme', repositoryData.readme)
                 setShowContextMenu(false)
               }
             }

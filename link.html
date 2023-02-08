@@ -22,7 +22,7 @@
       width: 20vh;
       height: 20vh;
       opacity: 0;
-      scale: 0;
+      transform: scale(0);
       background-image: url(resources/icon.png);
       background-size: cover;
       animation: animation 2.5s forwards;
@@ -31,11 +31,11 @@
     @keyframes animation {
       0% {
         opacity: 0;
-        scale: 0;
+        transform: scale(0);
       }
       100% {
         opacity: 1;
-        scale: 1;
+        transform: scale(1);
       }
     }
   </style>
@@ -51,7 +51,7 @@
       const { ipcRenderer } = require('electron')
       ipcRenderer.send('link')
       const img = document.querySelector('.img')
-      img.style.scale = 4
+      img.style.transform = 'scale(4)';
     } catch (e) {}
   </script>
 </body>

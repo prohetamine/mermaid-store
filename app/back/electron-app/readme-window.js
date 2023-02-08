@@ -37,8 +37,10 @@ module.exports = url => {
     }
   }
 
-  const link = () => {
-    win.setSize(200, 200, true)
+  const link = event => {
+    if (!win.isDestroyed() && event.sender.id === win.id) {
+      win.setSize(200, 200, true)
+    }
   }
 
   const close = event => {

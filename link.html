@@ -50,6 +50,8 @@
     try {
       const { ipcRenderer } = require('electron')
       ipcRenderer.send('link')
+      const img = document.querySelector('.img')
+      img.style.scale = 4
     } catch (e) {}
   </script>
 </body>

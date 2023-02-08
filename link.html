@@ -25,6 +25,7 @@
       transform: scale(0);
       background-image: url(resources/icon.png);
       background-size: cover;
+      transition: 2.5s;
       animation: animation 2.5s forwards;
     }
 
@@ -52,6 +53,9 @@
       ipcRenderer.send('link')
       const img = document.querySelector('.img')
       img.style.transform = 'scale(4)';
+      img.style.opacity = '1';
+      img.style.animation = 'none';
+
     } catch (e) {}
   </script>
 </body>

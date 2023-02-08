@@ -8,12 +8,6 @@
     "buildResources": "build-res"
   },
   "compression": "maximum",
-  "protocols": {
-    "name": "foobar-protocol",
-    "schemes": [
-      "foobar"
-    ]
-  },
   "dmg": {
     "icon": "resources/icon.png",
     "background": "resources/background.png"

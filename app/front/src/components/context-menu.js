@@ -81,6 +81,7 @@ const Text = styled.div`
   font-size: 12px;
   line-height: 15px;
   color: #696969;
+  user-select: none;
 `
 
 const Icon = styled.div`

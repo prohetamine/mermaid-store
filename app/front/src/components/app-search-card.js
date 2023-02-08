@@ -211,6 +211,12 @@ const AppSearchCard = ({ repositoryData, isLine }) => {
                 window.socket.emit('repository-update', repositoryData.link)
                 setShowContextMenu(false)
               }
+
+              if (type === 'readme') {
+                console.log(repositoryData.link+'/readme.md')
+                window.socket.emit('open-readme', 'https://raw.githubusercontent.com/prohetamine/official/main/README.md')
+                setShowContextMenu(false)
+              }
             }
           }
         />
@@ -229,8 +235,8 @@ const AppSearchCard = ({ repositoryData, isLine }) => {
         </InstallingWrapper>
         <Title>{repositoryData.repository} ({md5(repositoryData.repository).slice(15, 25)})</Title>
         <MiddleContainer>
-          <MiddleTitle>Apps:</MiddleTitle>
-          <MiddleContent>{`${repositoryData.appsData.map(({ app }) => app).join(', ').slice(0, 55)} ... (${repositoryData.appsData.length})`}</MiddleContent>
+          <MiddleTitle>{repositoryData.appsData.length === 1 ? 'App' : 'Apps'}:</MiddleTitle>
+          <MiddleContent>{`${repositoryData.appsData.length === 1 ? repositoryData.appsData.map(({ app }) => app).join(', ').slice(0, 55) : `${repositoryData.appsData.map(({ app }) => app).join(', ').slice(0, 55)} ... (${repositoryData.appsData.length})`}`}</MiddleContent>
         </MiddleContainer>
         <SmallWrapper>
           {

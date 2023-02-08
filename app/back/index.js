@@ -3,9 +3,18 @@ const express             = require('express')
     , NodeMermaid         = require('node-mermaid')
     , NodeMermaidStore    = require('node-mermaid/store')
     , ElectronApp         = require('./electron-app')
-
+    , kill                = require('kill-port')
 ;(async () => {
   const server = express()
+
+  // fix for windows
+  try {
+    await kill(6767, 'tcp')
+  } catch (e) {}
+
+  try {
+    await kill(6767, 'udp')
+  } catch (e) {}
 
   const NME = NodeMermaid({
     port: 6767,

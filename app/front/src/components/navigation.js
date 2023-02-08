@@ -67,7 +67,7 @@ const Input = styled.input`
 const Navigation = observer(() => {
   useEffect(() => {
     window.socket.on('search', value => {
-      mainState.search = value
+      mainState.search = value.replace(/(\\|\*|\(|\)|\+|\[|\]|\?)/gi, '')
     })
   }, [])
 
@@ -78,7 +78,7 @@ const Navigation = observer(() => {
         <Input
           className='nodragbar'
           value={mainState.search}
-          onChange={({ target: { value } }) => mainState.search = value}
+          onChange={({ target: { value } }) => mainState.search = value.replace(/(\\|\*|\(|\)|\+|\[|\]|\?)/gi, '')}
           placeholder='Find repositories, apps ...'
         />
       </Wrapper>

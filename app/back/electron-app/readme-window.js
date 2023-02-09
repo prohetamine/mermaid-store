@@ -1,6 +1,5 @@
 const { BrowserWindow, ipcMain }   = require('electron')
     , path                         = require('path')
-    , qs                           = require('querystringify')
 
 module.exports = ({ search }) => url => {
   const win = new BrowserWindow({

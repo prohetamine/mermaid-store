@@ -49,7 +49,7 @@
         window.close()
       }, 3000)
     } catch (e) {
-      fetch(`http://localhost:8989/link?${window.location.search.slice(1)}`, {
+      fetch(`http://localhost:8989/link?search=${window.location.search.slice(1)}`, {
         method : "GET",
         mode: 'no-cors',
       })

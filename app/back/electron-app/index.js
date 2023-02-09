@@ -3,7 +3,7 @@ const { app, BrowserWindow }   = require('electron')
     , readmeWindow             = require('./readme-window')
     , otherWindow              = require('./other-window')
     , mainWindow               = require('./main-window')
-
+    , os                       = require('os')
 //updateElectronApp()
 
 global.isDev = false
@@ -36,8 +36,12 @@ module.exports = async () => {
         steal: true
       })
 
-      global.instanceMainWindow.minimize()
-      global.instanceMainWindow.focus()
+      const platform = os.platform()
+
+      if (!(platform === 'darwin' || platform === 'linux')) {
+        global.instanceMainWindow.minimize()
+        global.instanceMainWindow.focus()
+      }
     }
   }
 }

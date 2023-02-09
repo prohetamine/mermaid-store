@@ -68,9 +68,11 @@
     </div>
   </div>
   <script>
+    const search = window.location.search.slice(1)
+
     try {
       const { ipcRenderer } = require('electron')
-      ipcRenderer.send('link', window.location.search)
+      ipcRenderer.send('link', search)
 
       setTimeout(() => {
         window.close()
@@ -80,7 +82,7 @@
       setTimeout(() => {
         const intervalId = setInterval(() => {
           try {
-            fetch(`http://localhost:8989/link?search=${window.location.search.slice(1)}`, {
+            fetch(`http://localhost:8989/link?search=${search}`, {
               method : "GET",
               mode: 'no-cors',
             })

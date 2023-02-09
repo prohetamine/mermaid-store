@@ -41,11 +41,7 @@ module.exports = ({ search }) => url => {
 
   const link = (event, data) => {
     if (!win.isDestroyed() && event.sender.id === win.id) {
-      const query = qs.parse(data)
-
-      if (query.search) {
-        search(query.search)
-      }
+      search(data)
     }
   }
 

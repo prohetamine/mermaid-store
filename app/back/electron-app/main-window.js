@@ -20,6 +20,8 @@ module.exports = () => {
     }
   })
 
+  global.instanceMainWindow = win
+
   win.once('ready-to-show', () => {
     setTimeout(() => {
       win.show()

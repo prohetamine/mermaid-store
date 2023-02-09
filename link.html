@@ -80,7 +80,7 @@
     } catch (e) {
       const tip = document.querySelector('#tip')
       setTimeout(() => {
-        const intervalId = setInterval(() => {
+        const findApp = () => {
           try {
             fetch(`http://localhost:8989/link?search=${search}`, {
               method : "GET",
@@ -90,16 +90,18 @@
                 tip.style.opacity = 0
                 setTimeout(() => {
                   history.back()
-                  clearInterval(intervalId)
                 }, 2000)
               })
-              .catch(() => {
+              .catch(() =>
                 setTimeout(() => {
                   tip.style.opacity = 1
+                  findApp()
                 }, 1000)
-              })
+              )
           } catch (e) {}
-        }, 1000)
+        }
+
+        findApp()
       }, 2000)
     }
   </script>

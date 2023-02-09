@@ -35,6 +35,9 @@ module.exports = async () => {
       app.focus({
         steal: true
       })
+
+      global.instanceMainWindow.minimize()
+      global.instanceMainWindow.focus()
     }
   }
 }

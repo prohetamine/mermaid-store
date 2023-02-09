@@ -3,7 +3,6 @@ const express             = require('express')
     , NodeMermaid         = require('node-mermaid')
     , NodeMermaidStore    = require('node-mermaid/store')
     , ElectronApp         = require('./electron-app')
-    , qs                  = require('querystring')
 
 ;(async () => {
   const server = express()
@@ -42,12 +41,8 @@ const express             = require('express')
 
   server.get('/link', (req, res) => {
     focus()
-    const query = qs.parse(req.query.data)
-
-    console.log(query)
-
-    if (query.search) {
-      MS.search(query.search)
+    if (req.query.search) {
+      MS.search(req.query.search)
     }
 
     res.end('ok')

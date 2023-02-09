@@ -49,13 +49,9 @@
         window.close()
       }, 3000)
     } catch (e) {
-      fetch(`http://localhost:8989/link?data=${encodeURIComponent(window.location.search)}`, {
+      fetch(`http://localhost:8989/link?${window.location.search.slice(1)}`, {
         method : "GET",
         mode: 'no-cors',
-      }).then(e => {
-        console.log('ok')
-      }).then(e => {
-        console.log('app not started')
       })
     }
   </script>

@@ -53,6 +53,11 @@
         method : "GET",
         mode: 'no-cors',
       })
+        .then(() =>
+          setTimeout(() => {
+            history.back()
+          }, 500)
+        )
     }
   </script>
 </body>

@@ -49,15 +49,17 @@
         window.close()
       }, 3000)
     } catch (e) {
-      fetch(`http://localhost:8989/link?search=${window.location.search.slice(1)}`, {
-        method : "GET",
-        mode: 'no-cors',
-      })
-        .then(() =>
-          setTimeout(() => {
-            history.back()
-          }, 500)
-        )
+      setTimeout(() =>
+        fetch(`http://localhost:8989/link?search=${window.location.search.slice(1)}`, {
+          method : "GET",
+          mode: 'no-cors',
+        })
+          .then(() =>
+            setTimeout(() => {
+              history.back()
+            }, 2000)
+          )
+      , 2000)
     }
   </script>
 </body>

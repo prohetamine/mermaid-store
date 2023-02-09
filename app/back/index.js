@@ -44,6 +44,8 @@ const express             = require('express')
     focus()
     const query = qs.parse(req.query.data)
 
+    console.log(query)
+
     if (query.search) {
       MS.search(query.search)
     }

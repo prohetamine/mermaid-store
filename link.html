@@ -76,22 +76,29 @@
         window.close()
       }, 3000)
     } catch (e) {
-      setTimeout(() =>
-        fetch(`http://localhost:8989/link?search=${window.location.search.slice(1)}`, {
-          method : "GET",
-          mode: 'no-cors',
+      const tip = document.querySelector('#tip')
+      setTimeout(() => {
+        const intervalId = setInterval(() => {
+          try {
+            fetch(`http://localhost:8989/link?search=${window.location.search.slice(1)}`, {
+              method : "GET",
+              mode: 'no-cors',
+            })
+              .then(() => {
+                tip.style.opacity = 0
+                setTimeout(() => {
+                  history.back()
+                  clearInterval(intervalId)
+                }, 2000)
+              })
+              .catch(() => {
+                setTimeout(() => {
+                  tip.style.opacity = 1
+                }, 1000)
+              })
+          } catch (e) {}
         })
-          .then(() =>
-            setTimeout(() => {
-              history.back()
-            }, 2000)
-          )
-          .catch(() => {
-            setTimeout(() => {
-              document.querySelector('#tip').style.opacity = 1
-            }, 1000)
-          })
-      , 2000)
+      }, 2000)
     }
   </script>
 </body>

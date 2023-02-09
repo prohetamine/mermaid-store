@@ -3,12 +3,9 @@ const express             = require('express')
     , NodeMermaid         = require('node-mermaid')
     , NodeMermaidStore    = require('node-mermaid/store')
     , ElectronApp         = require('./electron-app')
-    , fixForWindows       = require('./libs/fix-for-windows')
 
 ;(async () => {
   const server = express()
-
-  await fixForWindows()
 
   const NME = NodeMermaid({
     port: 6767,
@@ -33,18 +30,24 @@ const express             = require('express')
     MS.AppChannel.writeData('status', status)
   )
 
-  const { mainWindow, otherWindow, readmeWindow, browserProtocol } = await ElectronApp()
+  const { mainWindow, otherWindow, readmeWindow, focus } = await ElectronApp()
 
-  const options = {
+  const _readmeWindow = readmeWindow({
     search: MS.search
-  }
-
-  browserProtocol(options)
-
-  const _readmeWindow = readmeWindow(options)
+  })
 
   MS.on('open-window', otherWindow)
   MS.on('open-readme', _readmeWindow)
+
+  server.get('/link', (req, res) => {
+    focus()
+
+    if (req.query.search) {
+      MS.search(req.query.search)
+    }
+
+    res.end('ok')
+  })
 
   server.use('/build', express.static(path.resolve(__dirname, '..', 'front', 'build')))
   server.listen(8989, () => mainWindow())

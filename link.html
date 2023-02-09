@@ -49,7 +49,14 @@
         window.close()
       }, 3000)
     } catch (e) {
-      window.location.href = `mermaid-store://${window.location.search}`
+      fetch(`http://localhost:8989/link?search=${window.location.search}`, {
+        method : "GET",
+        mode: 'no-cors',
+      }).then(e => {
+        alert('ok')
+      }).then(e => {
+        alert('app not started')
+      })
     }
   </script>
 </body>

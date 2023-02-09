@@ -7,6 +7,10 @@
     "output": "dist",
     "buildResources": "build-res"
   },
+  "protocols": {
+    "name": "mermaid-store",
+    "schemes": ["mermaid-store"]
+  },
   "compression": "maximum",
   "dmg": {
     "icon": "resources/icon.png",

@@ -175,7 +175,12 @@ const Support = observer(({ onHide }) => {
         This is an open source project, but you can still support the author, communicate with him, express your wishes and ideas
       </Description>
       <Image style={{ top: '32px', right: '33px', backgroundImage: `url(${supportImage})`, backgroundSize: 'cover' }} />
-      <Link style={{ top: '87px', right: '33px', color: '#15BEE3' }}>Go to →</Link>
+      <Link
+        style={{ top: '87px', right: '33px', color: '#15BEE3' }}
+        onClick={() => {
+          window.socket.emit('open-readme', `https://raw.githubusercontent.com/prohetamine/mermaid-store/main/SUPPORT.md`)
+        }}
+      >Go to →</Link>
     </InfoBody>
   )
 })

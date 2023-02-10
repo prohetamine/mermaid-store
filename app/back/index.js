@@ -1,8 +1,9 @@
 const express             = require('express')
     , path                = require('path')
-    , NodeMermaid         = require('node-mermaid')
-    , NodeMermaidStore    = require('node-mermaid/store')
+    , NodeMermaid         = require('/Users/stas/Projects/mermaid-extension/node-mermaid')
+    , NodeMermaidStore    = require('/Users/stas/Projects/mermaid-extension/node-mermaid/store')
     , ElectronApp         = require('./electron-app')
+    , sleep               = require('sleep-promise')
 
 ;(async () => {
   const server = express()
@@ -39,15 +40,19 @@ const express             = require('express')
   MS.on('open-window', otherWindow)
   MS.on('open-readme', _readmeWindow)
 
-  server.get('/link', (req, res) => {
-    focus()
-    if (req.query.search) {
-      MS.search(req.query.search)
-    }
-
-    res.end('ok')
-  })
-
   server.use('/build', express.static(path.resolve(__dirname, '..', 'front', 'build')))
-  server.listen(8989, () => mainWindow())
+  server.listen(8989, async () => {
+    await mainWindow()
+
+    await sleep(1000)
+
+    server.get('/link', (req, res) => {
+      focus()
+      if (req.query.search) {
+        MS.search(req.query.search)
+      }
+
+      res.end('ok')
+    })
+  })
 })()

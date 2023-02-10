@@ -1,10 +1,15 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
+import useAppsState from './../hooks/use-apps-state'
+
 import mainState from './../main-state'
 
 import background from './../assets/background.png'
 import logo from './../assets/images/logo.svg'
+import onIcon from './../assets/navigation/state/on.svg'
+import offIcon from './../assets/navigation/state/off.svg'
+import deleteIcon from './../assets/navigation/delete.svg'
 
 const Body = styled.div`
   display: flex;
@@ -17,6 +22,7 @@ const Body = styled.div`
   height: 197px;
   background-image: url(${background});
   background-size: cover;
+  position: relative;
 `
 
 const Wrapper = styled.div`
@@ -37,6 +43,10 @@ const Logo = styled.div`
   width: 100px;
   height: 100px;
   background-image: url(${logo});
+`
+
+const SearchWrapper = styled.div`
+  position: relative;
 `
 
 const Input = styled.input`
@@ -64,7 +74,41 @@ const Input = styled.input`
   border: none;
 `
 
+const Button = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  gap: 10px;
+  position: absolute;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 3px rgba(23, 23, 23, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+`
+
+const BigIcon = styled.div`
+  width: 26px;
+  height: 26px;
+  background-image: url(${props => props.src});
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+`
+
+const Icon = styled.div`
+  width: 14px;
+  height: 14px;
+  background-image: url(${props => props.src});
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+`
+
 const Navigation = observer(() => {
+  const isPlay = useAppsState()
+
   useEffect(() => {
     window.socket.on('search', value => {
       mainState.search = value.replace(/(\\|\*|\(|\)|\+|\[|\]|\?)/gi, '')
@@ -73,14 +117,52 @@ const Navigation = observer(() => {
 
   return (
     <Body className='dragbar'>
+      <Button
+        style={{
+          right: '10px',
+          bottom: '10px'
+        }}
+        onClick={() => {
+          isPlay
+            ? window.socket.emit('app-pause', { repository: '*', app: '*' })
+            : window.socket.emit('app-play', { repository: '*', app: '*' })
+        }}
+      >
+        <BigIcon
+          src={
+            isPlay
+              ? onIcon
+              : offIcon
+          }
+        />
+      </Button>
       <Wrapper>
         <Logo />
-        <Input
-          className='nodragbar'
-          value={mainState.search}
-          onChange={({ target: { value } }) => mainState.search = value.replace(/(\\|\*|\(|\)|\+|\[|\]|\?)/gi, '')}
-          placeholder='Find repositories, apps ...'
-        />
+        <SearchWrapper>
+          <Input
+            className='nodragbar'
+            value={mainState.search}
+            onChange={({ target: { value } }) => mainState.search = value.replace(/(\\|\*|\(|\)|\+|\[|\]|\?)/gi, '')}
+            placeholder='Find repositories, apps ...'
+          />
+          {
+            mainState.search
+              ? (
+                <Button
+                  style={{
+                    right: '-48px',
+                    top: '0px'
+                  }}
+                  onClick={() => mainState.search = ''}
+                >
+                  <Icon src={deleteIcon} />
+                </Button>
+              )
+              : (
+                null
+              )
+          }
+        </SearchWrapper>
       </Wrapper>
     </Body>
   )

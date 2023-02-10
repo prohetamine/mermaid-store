@@ -16,6 +16,7 @@ const mainState = observable({
     installedApplications: 0,
     activeApplications: 0
   },
+  isPlayAllApp: false,
   readmeViewerUrl: null,
   pinApps
 })

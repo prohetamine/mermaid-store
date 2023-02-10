@@ -33,7 +33,6 @@ const Body = styled.div`
   box-shadow: 0px 1px 5px rgba(23, 23, 23, 0.15);
   border-radius: 8px;
   margin-right: 20px;
-  margin-bottom: 20px;
   box-sizing: border-box;
   user-select: none;
 `
@@ -172,8 +171,16 @@ const AppCard = observer(({ appData }) => {
             }
 
             if (type === 'update') {
-              window.socket.emit('app-update', { repository: appData.repository, app: appData.app, zip: appData.zip })
               setShowContextMenu(false)
+              if (appData.author === 'prohetamine' && appData.repository === 'official') {
+                window.socket.emit('app-update', { repository: appData.repository, app: appData.app, zip: appData.zip })
+              } else {
+                const isUpdate = window.confirm('This is a third-party application from an unofficial repository, updating the application can lead to irreversible and unpredictable consequences, do you really want to install it ?')
+
+                if (isUpdate) {
+                  window.socket.emit('app-update', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                }
+              }
             }
 
             if (type === 'readme') {
@@ -192,16 +199,24 @@ const AppCard = observer(({ appData }) => {
             }
 
             if (type === 'install') {
-              window.socket.emit('app-install', { repository: appData.repository, app: appData.app, zip: appData.zip })
               setShowContextMenu(false)
+              if (appData.author === 'prohetamine' && appData.repository === 'official') {
+                window.socket.emit('app-install', { repository: appData.repository, app: appData.app, zip: appData.zip })
+              } else {
+                const isIstall = window.confirm('This is a third-party application from an unofficial repository, installing the application can lead to irreversible and unpredictable consequences, do you really want to install it ?')
+
+                if (isIstall) {
+                  window.socket.emit('app-install', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                }
+              }
             }
           }
         }
       />
       <Header>
         <TitleBody>
-          <RepositoryName>~{(r => r.length > 10 ? md5(r).slice(15, 25) : r)(appData.repository)}/</RepositoryName>
-          <AppName>{(a => a.length > 11 ? md5(a).slice(15, 26) : a)(appData.app)}</AppName>
+          <RepositoryName>~{(r => (r.length > 10 && appData.size === 1) ? md5(r).slice(15, 25) : r)(appData.repository)}/</RepositoryName>
+          <AppName>{(a => (a.length > 10 && appData.size === 1) ? md5(a).slice(15, 19) : a)(appData.app)}</AppName>
         </TitleBody>
         <ContextMenuIcon onClick={() => setShowContextMenu(true)} />
       </Header>
@@ -215,8 +230,17 @@ const AppCard = observer(({ appData }) => {
                   icon={progressData.type === 1 ? 'plus' : progressData.type === 2 ? 'arrow_down' : 'arrow_down'}
                   active={!progressData.view}
                   onClick={
-                    () =>
-                      window.socket.emit('app-update', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                    () => {
+                      if (appData.author === 'prohetamine' && appData.repository === 'official') {
+                        window.socket.emit('app-update', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                      } else {
+                        const isUpdate = window.confirm('This is a third-party application from an unofficial repository, updating the application can lead to irreversible and unpredictable consequences, do you really want to install it ?')
+
+                        if (isUpdate) {
+                          window.socket.emit('app-update', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                        }
+                      }
+                    }
                   }
                 />
               )
@@ -227,8 +251,17 @@ const AppCard = observer(({ appData }) => {
                   icon={progressData.type === 1 ? 'plus' : progressData.type === 2 ? 'arrow_down' : 'plus'}
                   active={!progressData.view}
                   onClick={
-                    () =>
-                      window.socket.emit('app-install', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                    () => {
+                      if (appData.author === 'prohetamine' && appData.repository === 'official') {
+                        window.socket.emit('app-install', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                      } else {
+                        const isIstall = window.confirm('This is a third-party application from an unofficial repository, installing the application can lead to irreversible and unpredictable consequences, do you really want to install it ?')
+
+                        if (isIstall) {
+                          window.socket.emit('app-install', { repository: appData.repository, app: appData.app, zip: appData.zip })
+                        }
+                      }
+                    }
                   }
                 />
               )

@@ -15,6 +15,7 @@ const icons = {
 }
 
 const Wrapper = styled.div`
+  margin-top: 20px;
   margin-bottom: 20px;
 `
 
@@ -30,7 +31,6 @@ const Repository = styled.div`
   background: #FFFFFF;
   box-shadow: 0px 1px 5px rgba(23, 23, 23, 0.15);
   border-radius: 8px;
-  margin-bottom: 20px;
 `
 
 const Title = styled.div`

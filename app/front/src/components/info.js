@@ -8,7 +8,6 @@ import removeIcon from './../assets/general/remove.svg'
 import apiImage from './../assets/images/api.png'
 import supportImage from './../assets/images/crystal.png'
 
-
 const Body = styled.div`
   user-select: none;
 `
@@ -27,7 +26,7 @@ const Line = styled.div`
   background: #EBEBEB;
   margin: 0px 47px;
   box-sizing: border-box;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 `
 
 const InfoBody = styled.div`
@@ -142,10 +141,6 @@ const Link = styled.div`
   cursor: pointer;
 `
 
-const Empty = styled.div`
-  height: 20px;
-`
-
 const StatusWall = observer(({ onHide }) => {
   return (
     <InfoBody width='222px'>
@@ -194,7 +189,12 @@ const Api = observer(({ onHide }) => {
         Create and develop your own applications with documentation
       </Description>
       <Image style={{ top: '32px', right: '33px', backgroundImage: `url(${apiImage})` }} />
-      <Link style={{ top: '87px', right: '33px', color: '#696969' }}>Go to →</Link>
+      <Link
+        style={{ top: '87px', right: '33px', color: '#696969' }}
+        onClick={() => {
+          window.socket.emit('open-readme', `https://raw.githubusercontent.com/prohetamine/mermaid-store/main/API.md`)
+        }}
+      >Go to →</Link>
     </InfoBody>
   )
 })
@@ -250,7 +250,7 @@ const Navigation = observer(() => {
               </Body>
             )
             : (
-              <Empty />
+              null
             )
 })
 

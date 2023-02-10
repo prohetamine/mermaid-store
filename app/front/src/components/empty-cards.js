@@ -9,6 +9,7 @@ const Body = styled.div`
   overflow-y: scroll;
   gap: 30px;
   user-select: none;
+  margin-top: 20px;
 `
 
 const Image = styled.img`

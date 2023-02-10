@@ -6,7 +6,7 @@ const { app, BrowserWindow }   = require('electron')
     , os                       = require('os')
 //updateElectronApp()
 
-global.isDev = false
+global.isDev = true
 
 global.electronApp = app
 

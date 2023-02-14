@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const useGetRepositorys = () => {
-  const [repositorys, setRepositorysData] = useState([])
+  const [repositorys, setRepositorysData] = useState(null)
 
   useEffect(() => {
     const getRepositorys = data =>
@@ -9,7 +9,7 @@ const useGetRepositorys = () => {
 
     window.socket.on('get-repositorys', getRepositorys)
     window.socket.emit('get-repositorys')
-    
+
     return () => window.socket.off('get-repositorys', getRepositorys)
   }, [])
 

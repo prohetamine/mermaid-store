@@ -106,6 +106,12 @@ const Icon = styled.div`
   flex-grow: 0;
 `
 
+let isMacOS = false
+
+try {
+  isMacOS = window.require('os').platform() === 'darwin'
+} catch (e) {}
+
 const Navigation = observer(() => {
   const isPlay = useAppsState()
 
@@ -119,9 +125,10 @@ const Navigation = observer(() => {
     <Body className='dragbar'>
       <Button
         style={{
-          right: '10px',
-          bottom: '10px'
+          [isMacOS ? 'right' : 'left']: '10px',
+          top: '10px'
         }}
+        className='nodragbar'
         onClick={() => {
           isPlay
             ? window.socket.emit('app-pause', { repository: '*', app: '*' })
@@ -153,6 +160,7 @@ const Navigation = observer(() => {
                     right: '-48px',
                     top: '0px'
                   }}
+                  className='nodragbar'
                   onClick={() => mainState.search = ''}
                 >
                   <Icon src={deleteIcon} />

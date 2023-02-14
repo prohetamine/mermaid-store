@@ -9,14 +9,15 @@ module.exports = () => {
     minWidth: 652,
     maxWidth: 1252,
     frame: false,
-    show: false,
+    //show: false,
     maximizable:false,
     fullscreen: false,
     fullscreenable: false,
     alwaysOnTop: false,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      webSecurity: false
     }
   })
 
@@ -30,11 +31,17 @@ module.exports = () => {
 
   win.webContents.on('select-bluetooth-device', (event, deviceList, callback) => {
     event.preventDefault()
-    console.log(deviceList)
     if (deviceList && deviceList.length > 0) {
       callback(deviceList[0].deviceId)
     }
   })
+
+  // fix for bluetooth ¯\_(ツ)_/¯
+  setInterval(() => {
+    win.webContents.mainFrame.frames.map(e => {
+      win.webContents.executeJavaScript(`document.querySelector('iframe[src="${e.url}"]').contentWindow.document.body.click()`, true)
+    })
+  }, 10000)
 
   ipcMain.on('exit', event => {
     if (event.sender.id === win.id) {

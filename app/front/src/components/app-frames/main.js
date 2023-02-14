@@ -12,6 +12,7 @@ const Main = ({ appData, size }) => {
       title={`~${appData.repository}/${appData.app}`}
       src={`http://localhost:6969/${appData.repository}/${appData.app}/public/main.html`}
       frameBorder="0"
+      allow="bluetooth"
     />
   )
 }

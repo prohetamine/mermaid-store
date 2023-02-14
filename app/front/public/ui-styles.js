@@ -199,9 +199,17 @@ window.onload = () => {
   wrapperNode.appendChild(minimizeButtonNode)
   wrapperNode.appendChild(maximizeButtonNode)
 
-  barNode.style.position = isBarBackground ? 'fixed' : 'absolute'
+  barNode.style.position = 'fixed'
   barNode.appendChild(wrapperNode)
 
   document.body.appendChild(style)
   document.body.appendChild(barNode)
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 165) {
+      barNode.className = `dragbar mermaid-style-bar mermaid-style-bar-background`
+    } else {
+      barNode.className = `dragbar mermaid-style-bar ${isBarBackground ? 'mermaid-style-bar-background' : ''}`
+    }
+  })
 }

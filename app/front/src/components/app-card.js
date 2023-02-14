@@ -35,6 +35,7 @@ const Body = styled.div`
   margin-right: 20px;
   box-sizing: border-box;
   user-select: none;
+  outline: none;
 `
 
 const Header = styled.div`

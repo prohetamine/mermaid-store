@@ -37,15 +37,16 @@ const Main = observer(() => {
   const appsData = useGetApps()
       , workedAppsData = useGetWorkedApps()
       , repositorysData = useGetRepositorys()
+      , normalizeRepositorysData = repositorysData || []
 
   useEffect(() => {
     mainState.statusWall.installedApplications = appsData.length
   }, [appsData])
 
   useEffect(() => {
-    mainState.statusWall.repositorys = repositorysData.length
-    mainState.statusWall.availableApplications = repositorysData.reduce((ctx, { appsData }) => ctx + appsData.length, 0)
-  }, [repositorysData])
+    mainState.statusWall.repositorys = normalizeRepositorysData.length
+    mainState.statusWall.availableApplications = normalizeRepositorysData.reduce((ctx, { appsData }) => ctx + appsData.length, 0)
+  }, [normalizeRepositorysData])
 
   useEffect(() => {
     mainState.statusWall.activeApplications = workedAppsData.length
@@ -58,21 +59,27 @@ const Main = observer(() => {
       <Navigation />
       <Info />
       {
-        mainState.search
+        repositorysData !== null
           ? (
-            <AppSearchCards />
-          )
-          : appsData.length > 0
+            mainState.search
               ? (
-                <AppCards appsData={appsData} />
+                <AppSearchCards />
               )
-              : repositorysData.length > 0
+              : appsData.length > 0
                   ? (
-                    <EmptyCards image={findAppImage} label="What's next?" />
+                    <AppCards appsData={appsData} />
                   )
-                  : (
-                    <EmptyCards image={findRepositoryImage} label="What's next?" />
-                  )
+                  : repositorysData.length > 0
+                      ? (
+                        <EmptyCards image={findAppImage} label="What's next?" />
+                      )
+                      : (
+                        <EmptyCards image={findRepositoryImage} label="What's next?" />
+                      )
+          )
+          : (
+            null
+          )
       }
     </>
   )

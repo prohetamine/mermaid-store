@@ -1,7 +1,8 @@
 const express             = require('express')
+    , cors                = require('cors')
     , path                = require('path')
-    , NodeMermaid         = require('/Users/stas/Projects/mermaid-extension/node-mermaid')
-    , NodeMermaidStore    = require('/Users/stas/Projects/mermaid-extension/node-mermaid/store')
+    , NodeMermaid         = require('node-mermaid')
+    , NodeMermaidStore    = require('node-mermaid/store')
     , ElectronApp         = require('./electron-app')
     , sleep               = require('sleep-promise')
 
@@ -39,6 +40,8 @@ const express             = require('express')
 
   MS.on('open-window', otherWindow)
   MS.on('open-readme', _readmeWindow)
+
+  server.use(cors())
 
   server.use('/build', express.static(path.resolve(__dirname, '..', 'front', 'build')))
   server.listen(8989, async () => {

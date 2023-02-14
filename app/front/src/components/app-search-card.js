@@ -31,6 +31,7 @@ const Repository = styled.div`
   background: #FFFFFF;
   box-shadow: 0px 1px 5px rgba(23, 23, 23, 0.15);
   border-radius: 8px;
+  outline: none;
 `
 
 const Title = styled.div`

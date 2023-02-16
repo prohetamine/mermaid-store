@@ -165,9 +165,10 @@ window.onload = () => {
 
   const closeButtonNode = document.createElement('div')
   closeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-one`
-  closeButtonNode.addEventListener('click', () =>
+  closeButtonNode.addEventListener('click', () => {
     ipcRenderer.send('exit')
-  )
+    window.close()
+  })
 
   const minimizeButtonNode = document.createElement('div')
   minimizeButtonNode.className = `nodragbar mermaid-style-${platform}-button mermaid-style-${platform}-button-two`

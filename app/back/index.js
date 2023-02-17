@@ -23,6 +23,7 @@ const express             = require('express')
   await MS.ready()
 
   MS.AppChannel.on('sendMessage', NME.sendMessage)
+  MS.AppChannel.on('sendMessages', NME.sendMessages)
 
   NME.on('data', data =>
     MS.AppChannel.writeData('data', data)

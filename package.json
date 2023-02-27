@@ -1,6 +1,6 @@
 {
   "name": "mermaid-store",
-  "version": "2.2.9",
+  "version": "3.0.0",
   "description": "Webcam Tool",
   "main": "app/back/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "html-escaper": "^3.0.3",
     "http": "^0.0.1-security",
     "kill-port": "^2.0.1",
-    "node-mermaid": "^2.7.2",
+    "node-mermaid": "^2.7.31",
     "open": "^8.4.0",
     "path": "^0.12.7",
     "query-string": "^8.1.0",

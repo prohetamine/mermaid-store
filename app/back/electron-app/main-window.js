@@ -39,7 +39,14 @@ module.exports = () => {
   // fix for bluetooth ¯\_(ツ)_/¯
   setInterval(() => {
     win.webContents.mainFrame.frames.map(e => {
-      win.webContents.executeJavaScript(`document.querySelector('iframe[src="${e.url}"]').contentWindow.document.body.click()`, true)
+      win.webContents.executeJavaScript(`
+        try {
+          document.querySelector('iframe[src="${e.url}"]').contentWindow.document.body.click()
+        } catch (e) {
+          console.log('Not find frame click, info: ${e.url}')
+        }`,
+        true
+      )
     })
   }, 10000)
 
